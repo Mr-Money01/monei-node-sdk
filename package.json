@@ -1,0 +1,39 @@
+{
+  "name": "monei-sdk",
+  "version": "1.0.0",
+  "description": "Node.js SDK for Monei API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "mrmonei",
+    "crypto",
+    "wallet",
+    "api",
+    "sdk"
+  ],
+  "author": "Ayodeji Osayemi",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.13.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mr-Money01/monei-node-sdk.git"
+  }
+}
