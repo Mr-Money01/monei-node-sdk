@@ -44,7 +44,7 @@ main();
 - **Solana Wallets** - SOL and SPL token management
 - **Bill Payments** - Airtime, data, electricity, cable TV
 - **Crypto Exchange** - Token swaps on EVM and Solana
-- **AI Agent** - Conversational banking assistant with streaming support
+- **AI Agent** - Financial assistant with streaming support
 - **Transaction Management** - Transaction history and tracking
 - **Beneficiary Management** - Bank, crypto, and peer beneficiaries
 - **Full TypeScript Support** - Complete type definitions
