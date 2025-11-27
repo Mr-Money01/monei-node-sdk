@@ -17,7 +17,7 @@ export class MoneiClient {
       baseURL: this.config.baseUrl,
       timeout: this.config.timeout,
       headers: {
-        'X-API-KEY': this.config.apiKey,
+        'X-API-KEY': this.config.apiKey || process.env.MONEI_API_KEY,
         'Content-Type': 'application/json',
       },
     });

@@ -280,7 +280,7 @@ interface MoneiConfig {
 ### Available Services
 
 - `sdk.user` - User profile and management
-- `sdk.wallet` - Wallet operations and banking
+- `sdk.wallet` - Wallet and financial operations
 - `sdk.evm` - EVM blockchain operations
 - `sdk.solana` - Solana blockchain operations
 - `sdk.transactions` - Transaction history

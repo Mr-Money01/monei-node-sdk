@@ -8,8 +8,23 @@ export interface BalanceResponseDto {
   data: BalanceDto;
 }
 
+interface Customization {
+    title?: string;
+}
+
+interface Customer {
+  email: string
+  phoneNumber: string
+  name: string
+}
+
 export interface FundWalletByNairaDto {
   amount: number;
+  reference?: string;
+  currency?: string;
+  redirectUrl?: string;
+  customization?: Customization;
+  customer?: Customer
 }
 
 export interface DepositResponseDto {
@@ -86,7 +101,12 @@ export interface WithdrawWalletDto {
   accountNumber: string;
   transactionPin: string;
   currency?: string;
+  reference?: string;
   narration?: string;
+}
+
+export interface WithdrawResponseDto {
+
 }
 
 export interface PeerTransferDto {
@@ -114,4 +134,16 @@ export interface UserKycInfoDto {
   pixBase64: string;
   kycStatus: string;
   verifiedAt: string;
+}
+
+export interface WithdrawDto {
+  reference: string;
+  status: string;
+  amount: number;
+}
+
+export interface WalletResponseDto {
+  statusCode: number;
+  message: string;
+  data: WithdrawDto;
 }
