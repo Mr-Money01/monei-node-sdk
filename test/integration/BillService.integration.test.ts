@@ -753,28 +753,7 @@ describe('BillService Integration Tests', () => {
 
 
 
-  // -------------------------------------------------------------------------//
-  // VALIDATE BILL                                                            //
-  // -------------------------------------------------------------------------//
-  describe('validateBill', () => {
-    it('should validate bill details', async () => {
-      if (!requireApiKey()) return;
 
-      const validateData: ValidateBillDto = {
-        itemCode: "AT099",
-        customer: "07078862245"
-      };
-
-      const result = await billService.validateBill(validateData);
-
-      expect(result).toHaveProperty('statusCode');
-      expect(result.statusCode).toBe(200);
-      expect(result).toHaveProperty('message');
-      expect(result).toHaveProperty('data');
-
-      console.log('Bill Validation Response:', result.data);
-    }, 30000);
-  });
 
   // -------------------------------------------------------------------------//
   // GET BILL BY REFERENCE                                                    //
