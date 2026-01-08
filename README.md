@@ -125,6 +125,9 @@ console.log(`Signature: ${transferResult.data.signature}`);
 ### 4. Bill Payments
 
 ```typescript
+// Get Available Electricity Billers
+const electricityBillersResult = await sdk.bills.getElectricityBiller();
+
 // Buy airtime
 const airtimeResult = await sdk.bills.buyAirtime({
   phoneNumber: "08012345678",

@@ -9,7 +9,10 @@ import {
   CableTvPaymentDto,
   BillPaymentResponseDto,
   ElectricityBillerDto,
-  BillDto
+  BillDto,
+  ElectricityBillerResponseDto,
+  PaginatedBillResponseDto,
+  BillResponseDto
 } from '../types';
 
 export class BillService {
@@ -19,8 +22,8 @@ export class BillService {
     return this.client.get<BillerItemsResponseDto>(`/api/v1/bills/get-biller-items/${category}/${billerName}`);
   }
 
-  async getElectricityBiller(): Promise<ElectricityBillerDto> {
-    return this.client.get<ElectricityBillerDto>('/api/v1/bills/billers/electricity');
+  async getElectricityBiller(): Promise<ElectricityBillerResponseDto> {
+    return this.client.get<ElectricityBillerResponseDto>('/api/v1/bills/billers/electricity');
   }
 
   async validateBill(validateData: ValidateBillDto): Promise<any> {
@@ -43,12 +46,12 @@ export class BillService {
     return this.client.post<BillPaymentResponseDto>('/api/v1/bills/subscribe-cable-tv', cableData);
   }
 
-  async getBills(): Promise<BillDto[]> {
-    return this.client.get<BillDto[]>('/api/v1/bills');
+  async getBills(): Promise<PaginatedBillResponseDto[]> {
+    return this.client.get<PaginatedBillResponseDto[]>('/api/v1/bills');
   }
 
-  async getBillByReference(reference: string): Promise<BillDto[]> {
-    return this.client.get<BillDto[]>(`/api/v1/bills/reference/${reference}`);
+  async getBillByReference(reference: string): Promise<BillResponseDto[]> {
+    return this.client.get<BillResponseDto[]>(`/api/v1/bills/reference/${reference}`);
   }
 
   async generateReceipt(transactionId: string): Promise<any> {

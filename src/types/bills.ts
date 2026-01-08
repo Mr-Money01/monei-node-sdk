@@ -39,9 +39,16 @@ export interface ElectricityBillerDto {
   billerCode: string;
 }
 
+export interface ElectricityBillerResponseDto {
+  statusCode: number,
+  message: string,
+  data: ElectricityBillerDto[]
+}
+
 
 export interface ValidateBillDto {
-  itemCode: string;
+  itemCode?: string;
+  billerCode: string;
   customer: string;
 }
 
@@ -137,7 +144,26 @@ export interface BillDto {
   units?: string;
 }
 
+export interface BillResponseDto {
+  statusCode: 200,
+  message: string;
+  data: BillDto;
+}
 
+export interface PaginatedBillDto {
+  bills: BillDto[];
+  page: number;
+  total: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
+export interface PaginatedBillResponseDto {
+  statusCode: number;
+  message: string;
+  data: PaginatedBillDto;
+}
 
 export interface BillDataDto {
   type: false;
