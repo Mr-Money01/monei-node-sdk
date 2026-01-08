@@ -8,6 +8,7 @@ import {
   ElectricityPaymentDto,
   CableTvPaymentDto,
   BillPaymentResponseDto,
+  ElectricityBillerDto,
   BillDto
 } from '../types';
 
@@ -16,6 +17,10 @@ export class BillService {
 
   async getBillerItems(category: BillCategory, billerName: string): Promise<BillerItemsResponseDto> {
     return this.client.get<BillerItemsResponseDto>(`/api/v1/bills/get-biller-items/${category}/${billerName}`);
+  }
+
+  async getElectricityBiller(): Promise<ElectricityBillerDto> {
+    return this.client.get<ElectricityBillerDto>('/api/v1/bills/billers/electricity');
   }
 
   async validateBill(validateData: ValidateBillDto): Promise<any> {
@@ -38,7 +43,15 @@ export class BillService {
     return this.client.post<BillPaymentResponseDto>('/api/v1/bills/subscribe-cable-tv', cableData);
   }
 
-  async getBillHistory(): Promise<BillDto[]> {
-    return this.client.get<BillDto[]>('/api/v1/bills/history');
+  async getBills(): Promise<BillDto[]> {
+    return this.client.get<BillDto[]>('/api/v1/bills');
+  }
+
+  async getBillByReference(reference: string): Promise<BillDto[]> {
+    return this.client.get<BillDto[]>(`/api/v1/bills/reference/${reference}`);
+  }
+
+  async generateReceipt(transactionId: string): Promise<any> {
+    return this.client.get<any>(`/api/v1/bills/receipt/${transactionId}`);
   }
 }

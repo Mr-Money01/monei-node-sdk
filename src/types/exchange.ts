@@ -22,7 +22,7 @@ export interface ZeroExQuoteDto {
   transaction: any;
 }
 
-export interface QuoteResponseDto {
+export interface PriceResponseDto {
   statusCode: number;
   message: string;
   data: ZeroExQuoteDto;

@@ -31,6 +31,15 @@ export interface BillerItemsResponseDto {
   data: BillerDto[];
 }
 
+
+
+export interface ElectricityBillerDto {
+  name: string;
+  code: string;
+  billerCode: string;
+}
+
+
 export interface ValidateBillDto {
   itemCode: string;
   customer: string;
@@ -126,4 +135,19 @@ export interface BillDto {
   metadata?: string;
   token?: string;
   units?: string;
+}
+
+
+
+export interface BillDataDto {
+  type: false;
+  status: string;
+  billerName: string;
+  billerCode: string;
+  customer: string;
+  startDate: string;
+  endDate: string;
+  amount: number;
+  reference: string;
+  
 }

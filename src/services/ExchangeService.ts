@@ -3,7 +3,7 @@ import {
   SwapNativeToTokenDto,
   SwapTokenToTokenDto,
   SwapTokenToNativeDto,
-  QuoteResponseDto,
+  PriceResponseDto,
   TxHashResponseDto,
   SwapSolToTokenDto,
   SwapResponseDto
@@ -13,24 +13,24 @@ export class ExchangeService {
   constructor(private client: MoneiClient) {}
 
   // EVM Exchange
-  async getNativeToTokenQuote(quoteData: SwapNativeToTokenDto): Promise<QuoteResponseDto> {
-    return this.client.post<QuoteResponseDto>('/api/v1/evm-exchange/quote/native-to-token', quoteData);
+  async getNativeToTokenPrice(quoteData: SwapNativeToTokenDto): Promise<PriceResponseDto> {
+    return this.client.post<PriceResponseDto>('/api/v1/evm-exchange/price/native-to-token', quoteData);
   }
 
   async swapNativeToToken(swapData: SwapNativeToTokenDto): Promise<TxHashResponseDto> {
     return this.client.post<TxHashResponseDto>('/api/v1/evm-exchange/native-to-token', swapData);
   }
 
-  async getTokenToTokenQuote(quoteData: SwapTokenToTokenDto): Promise<QuoteResponseDto> {
-    return this.client.post<QuoteResponseDto>('/api/v1/evm-exchange/quote/token-to-token', quoteData);
+  async getTokenToTokenPrice(quoteData: SwapTokenToTokenDto): Promise<PriceResponseDto> {
+    return this.client.post<PriceResponseDto>('/api/v1/evm-exchange/price/token-to-token', quoteData);
   }
 
   async swapTokenToToken(swapData: SwapTokenToTokenDto): Promise<TxHashResponseDto> {
     return this.client.post<TxHashResponseDto>('/api/v1/evm-exchange/token-to-token', swapData);
   }
 
-  async getTokenToNativeQuote(quoteData: SwapTokenToNativeDto): Promise<QuoteResponseDto> {
-    return this.client.post<QuoteResponseDto>('/api/v1/evm-exchange/quote/token-to-native', quoteData);
+  async getTokenToNativePrice(quoteData: SwapTokenToNativeDto): Promise<PriceResponseDto> {
+    return this.client.post<PriceResponseDto>('/api/v1/evm-exchange/price/token-to-native', quoteData);
   }
 
   async swapTokenToNative(swapData: SwapTokenToNativeDto): Promise<TxHashResponseDto> {

@@ -18,6 +18,25 @@ export interface CreateConversationDto {
   id: string;
 }
 
+export interface initializeConversationDto {
+  statusCode: number;
+  message: string;
+  data: ConversationDto;
+}
+
+export interface ConversationDto {
+  id: string;
+  user?: {};
+  messages?: {};
+  title: string;
+  context?: string;
+  isPinned: boolean;
+  createdAt: string;
+  updatedAt: string;
+  deletedDate?: string;
+}
+
+
 export interface PinConversationDto {
   pin: boolean;
 }
