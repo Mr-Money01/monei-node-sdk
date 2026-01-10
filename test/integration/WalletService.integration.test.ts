@@ -126,7 +126,7 @@ describe('WalletService Integration Tests', () => {
             amount: 100,
             bank: "058",
             accountNumber: "0736379044",
-            transactionPin: "0990",
+            transactionPin: "",
             currency: "NGN",
             reference: "5434532fgdsgdsgvds65365326532",
             narration: "integration test"

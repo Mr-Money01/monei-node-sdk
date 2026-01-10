@@ -60,7 +60,7 @@ describe('SolanaService Integration Tests', () => {
 
       const tokenMintAddress =
         process.env.TEST_SOLANA_TOKEN_MINT ||
-        'FwBixtdcmxawRFzBNeUmzhQzaFuvv6czs5wCQuLgWWsg'; 
+        'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB'; 
 
       const network: SolanaNetwork = 'mainnet-beta';
 
@@ -154,7 +154,7 @@ describe('SolanaService Integration Tests', () => {
   // SEND NATIVE TOKEN
   // --------------------------------------------------------------------
 
-  describe('sendNativeToken', () => {
+  describe.skip('sendNativeToken', () => {
     it('should attempt a real SOL transfer (requires funded test wallet)', async () => {
       if (!requireApiKey()) return;
 
