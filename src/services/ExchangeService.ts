@@ -6,7 +6,8 @@ import {
   PriceResponseDto,
   TxHashResponseDto,
   SwapSolToTokenDto,
-  SwapResponseDto
+  SwapResponseDto,
+  SwapTokenToSolDto
 } from '../types';
 
 export class ExchangeService {
@@ -38,10 +39,16 @@ export class ExchangeService {
   }
 
   // Solana Exchange
-  async getSolanaQuote(inputMint: string, outputMint: string, amount: number): Promise<any> {
-    return this.client.get('/api/v1/solana-exchange/quote', {
-      params: { inputMint, outputMint, amount }
-    });
+  async getSolanaToTokenQuote(quoteData: SwapSolToTokenDto): Promise<any> {
+    return this.client.get('/api/v1/solana-exchange/quote/sol-to-token', { params: quoteData });
+  }
+
+  async getTokenToSolanaQuote(quoteData: SwapTokenToSolDto): Promise<any> {
+    return this.client.get('/api/v1/solana-exchange/quote/token-to-sol', { params: quoteData });  
+  }
+
+  async getTokenToTokenQuote(quoteData: SwapTokenToTokenDto): Promise<any> {
+    return this.client.get('/api/v1/solana-exchange/quote/token-to-token', { params: quoteData });
   }
 
   async swapSolToToken(swapData: SwapSolToTokenDto): Promise<SwapResponseDto> {
@@ -52,7 +59,7 @@ export class ExchangeService {
     return this.client.post<SwapResponseDto>('/api/v1/solana-exchange/swap-token-to-token', swapData);
   }
 
-  async swapTokenToSol(swapData: SwapSolToTokenDto): Promise<SwapResponseDto> {
+  async swapTokenToSol(swapData: SwapTokenToSolDto): Promise<SwapResponseDto> {
     return this.client.post<SwapResponseDto>('/api/v1/solana-exchange/swap-token-to-sol', swapData);
   }
 }

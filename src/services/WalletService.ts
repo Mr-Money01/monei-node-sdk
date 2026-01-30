@@ -16,23 +16,6 @@ import {
 export class WalletService {
   constructor(private client: MoneiClient) {}
 
-  async getWalletBalance(chainId?: number): Promise<UserWalletDto> {
-    const params = chainId ? { chainId } : undefined;
-    return this.client.get<UserWalletDto>('/api/v1/wallet/me', { params });
-  }
-
-  async getNativeBalance(chainId: number): Promise<BalanceResponseDto> {
-    return this.client.get<BalanceResponseDto>('/api/v1/evm/balance/native', {
-      params: { chainId }
-    });
-  }
-
-  async getTokenBalance(tokenAddress: string, chainId: number): Promise<BalanceResponseDto> {
-    return this.client.get<BalanceResponseDto>('/api/v1/evm/balance/token', {
-      params: { tokenAddress, chainId }
-    });
-  }
-
   async fundWalletByNaira(fundData: FundWalletByNairaDto): Promise<FundWalletByNairaResponseDto> {
     return this.client.post<FundWalletByNairaResponseDto>('/api/v1/wallet/user/fund-wallet', fundData);
   }

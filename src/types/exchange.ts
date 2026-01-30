@@ -17,6 +17,7 @@ export interface SwapTokenToNativeDto {
   chainId: number;
 }
 
+
 export interface ZeroExQuoteDto {
   permit2?: any;
   transaction: any;
@@ -42,6 +43,11 @@ export interface SwapSolToTokenDto {
   outputMint: string;
   amount: number;
   slippageBps?: number;
+}
+
+export interface SwapTokenToSolDto {
+  amount: string;
+  inputMint: string;
 }
 
 export interface SwapDto {

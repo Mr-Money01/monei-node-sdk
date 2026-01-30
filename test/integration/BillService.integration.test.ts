@@ -12,9 +12,10 @@ import {
   BillerDto,
   BillPaymentResponseDto,
   BillPaymentDto,
-  ElectricityBillerDto
+  ElectricityBillerDto,
+  ElectricityBillerResponseDto
 } from '../../src/types';
-import { isBillerDto, isElectricityCodesDto } from '../utils/test-setup';
+
 
 
 describe('BillService Integration Tests', () => {
@@ -43,7 +44,7 @@ describe('BillService Integration Tests', () => {
       expect(result).toHaveProperty('message');
       expect(result).toHaveProperty('data');
 
-      const items: BillerDto[] | ElectricityCodesDto[] = result.data;
+      const items: BillerDto[] = result.data;
 
       //console.log('Fetched Biller Items:', items);
 
@@ -76,9 +77,7 @@ describe('BillService Integration Tests', () => {
         expect(item).toHaveProperty('commission_on_fee_or_amount');
         expect(item).toHaveProperty('validity_period');
 
-        // === TYPE CHECKS ===
-
-        if (isBillerDto(item)) {
+       
 
           expect(typeof item.id).toBe('number');
           expect(typeof item.biller_code).toBe('string');
@@ -103,7 +102,7 @@ describe('BillService Integration Tests', () => {
         }
         // === LOG EACH ITEM ===
         //console.log(`Validated biller item #${index + 1}: ${item.name} (${item.amount}) validity: ${item.validity_period}`);
-      });
+      );
 
       // === SUMMARY LOG ===
       //console.log('Total items fetched:', items.length);
@@ -127,7 +126,7 @@ describe('BillService Integration Tests', () => {
       expect(result).toHaveProperty('message');
       expect(result).toHaveProperty('data');
 
-      const items: BillerDto[] | ElectricityCodesDto[] = result.data;
+      const items: BillerDto[]  = result.data;
 
       //console.log('Fetched Biller Items:', items);
 
@@ -161,7 +160,7 @@ describe('BillService Integration Tests', () => {
         expect(item).toHaveProperty('validity_period');
 
         // === TYPE CHECKS ===
-        if (isBillerDto(item)) {
+        
 
           expect(typeof item.id).toBe('number');
           expect(typeof item.biller_code).toBe('string');
@@ -183,7 +182,7 @@ describe('BillService Integration Tests', () => {
           expect(typeof item.default_commission_on_amount).toBe('number');
           expect(typeof item.commission_on_fee_or_amount).toBe('number');
           expect(item.validity_period === null || typeof item.validity_period === 'string').toBe(true);
-        }
+        
         // === LOG EACH ITEM ===
         //console.log(`Validated biller item #${index + 1}: ${item.name} (${item.amount}) validity: ${item.validity_period}`);
       });
@@ -210,7 +209,7 @@ describe('BillService Integration Tests', () => {
       expect(result).toHaveProperty('message');
       expect(result).toHaveProperty('data');
 
-      const items: BillerDto[] | ElectricityCodesDto[] = result.data;
+      const items: BillerDto[]  = result.data;
 
       //console.log('Fetched Biller Items:', items);
 
@@ -244,7 +243,7 @@ describe('BillService Integration Tests', () => {
         expect(item).toHaveProperty('validity_period');
 
         // === TYPE CHECKS ===
-        if (isBillerDto(item)) {
+        
 
           expect(typeof item.id).toBe('number');
           expect(typeof item.biller_code).toBe('string');
@@ -266,7 +265,7 @@ describe('BillService Integration Tests', () => {
           expect(typeof item.default_commission_on_amount).toBe('number');
           expect(typeof item.commission_on_fee_or_amount).toBe('number');
           expect(item.validity_period === null || typeof item.validity_period === 'string').toBe(true);
-        }
+        
         // === LOG EACH ITEM ===
         //console.log(`default_commission_on_amount: ${item.default_commission_on_amount}`);
         //console.log(`commission_on_fee_or_amount: ${item.commission_on_fee_or_amount}`);
@@ -295,7 +294,7 @@ describe('BillService Integration Tests', () => {
       expect(result).toHaveProperty('message');
       expect(result).toHaveProperty('data');
 
-      const items: BillerDto[] | ElectricityCodesDto[] = result.data;
+      const items: BillerDto[] = result.data;
 
       //console.log('Fetched Biller Items:', items);
 
@@ -329,7 +328,7 @@ describe('BillService Integration Tests', () => {
         expect(item).toHaveProperty('validity_period');
 
         // === TYPE CHECKS ===
-        if (isBillerDto(item)) {
+       
 
           expect(typeof item.id).toBe('number');
           expect(typeof item.biller_code).toBe('string');
@@ -351,7 +350,7 @@ describe('BillService Integration Tests', () => {
           expect(typeof item.default_commission_on_amount).toBe('number');
           expect(typeof item.commission_on_fee_or_amount).toBe('number');
           expect(item.validity_period === null || typeof item.validity_period === 'string').toBe(true);
-        }
+        
         // === LOG EACH ITEM ===
         //console.log(`Validated biller item #${index + 1}: ${item.name} (${item.amount}) validity: ${item.validity_period}`);
       });
@@ -367,7 +366,7 @@ describe('BillService Integration Tests', () => {
     it(`should fetch available biller items for category: ELECTRICITYBILLS and it's billerNames `, async () => {
       if (!requireApiKey()) return;
 
-      const result: BillerItemsResponseDto = await billService.getElectricityBillerCodes();
+      const result: ElectricityBillerResponseDto = await billService.getElectricityBiller();
 
       // === BASE RESPONSE ===
       expect(result).toHaveProperty('StatusCode');
@@ -375,7 +374,7 @@ describe('BillService Integration Tests', () => {
       expect(result).toHaveProperty('message');
       expect(result).toHaveProperty('data');
 
-      const items: ElectricityCodesDto[] | BillerDto[] = result.data;
+      const items:  ElectricityBillerDto[] = result.data;
 
       //console.log('Fetched Biller Items:', items);
 
@@ -392,7 +391,7 @@ describe('BillService Integration Tests', () => {
 
 
         // === TYPE CHECKS ===
-        if (isElectricityCodesDto(item)) {
+       
           // ✅ TypeScript now knows item is ElectricityCodesDto
 
           expect(typeof item.name).toBe('string');
@@ -400,14 +399,8 @@ describe('BillService Integration Tests', () => {
           expect(typeof item.billerCode).toBe('string');
 
           console.log('Electricity code:', item);
-        } 
-        //expect(typeof item.code).toBe('string');
-        //expect(typeof item.billerCode).toBe('string');
-
-
-        // === LOG EACH ITEM ===
-        //console.log(`Validated biller item #${index + 1}: ${item.name} (${item.amount}) validity: ${item.validity_period}`);
-      });
+        });
+        
 
       // === SUMMARY LOG ===
       //console.log('Total items fetched:', items.length);
@@ -762,6 +755,46 @@ describe('BillService Integration Tests', () => {
     it('should validate get bill transaction details by reference number', async () => {
       if (!requireApiKey()) return;
       const result = await billService.getBillByReference('YOUR_BILL_REFERENCE_HERE');
+      console.log('Get Bill By Reference Response:', result);
+
+      expect(result).toHaveProperty('statusCode');
+      //expect(result.statusCode).toBe(200);
+      //expect(result).toHaveProperty('message');
+      //expect(result).toHaveProperty('data');
+
+      //console.log('Bill Validation Response:', result.data);
+    }, 30000);
+  });
+
+  // -------------------------------------------------------------------------//
+  // GET RECEIPT BY TRANSACTION ID                                                    //
+  // -------------------------------------------------------------------------//
+  describe('getReceiptByTransactionId', () => {
+    it('should get a transaction receipt by it Id', async () => {
+      if (!requireApiKey()) return;
+      const result = await billService.generateReceipt('YOUR_BILL_REFERENCE_HERE');
+      console.log('Get Bill By Reference Response:', result);
+
+      expect(result).toHaveProperty('statusCode');
+      //expect(result.statusCode).toBe(200);
+      //expect(result).toHaveProperty('message');
+      //expect(result).toHaveProperty('data');
+
+      //console.log('Bill Validation Response:', result.data);
+    }, 30000);
+  });
+
+  // -------------------------------------------------------------------------//
+  // VALIDATE BILL                                                           //
+  // -------------------------------------------------------------------------//
+  describe('validateBill', () => {
+    it('should validate bill details', async () => {
+      if (!requireApiKey()) return;
+      const billData: ValidateBillDto = {
+        billerCode: 'YOUR_BILLER_CODE_HERE',
+        customer: 'YOUR_CUSTOMER_ID_HERE'
+      };
+      const result = await billService.validateBill(billData);
       console.log('Get Bill By Reference Response:', result);
 
       expect(result).toHaveProperty('statusCode');
