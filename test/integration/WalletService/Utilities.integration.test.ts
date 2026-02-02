@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from '@jest/globals';
-import { WalletServiceUtilities } from '../../../src/services/wallet-services';
+import { WalletUtilityService } from '../../../src/services/wallet/WalletUtility.service';
 import { createTestWalletUtility, requireApiKey } from '../../utils/test-setup';
 import {
   
@@ -9,7 +9,7 @@ import {
 } from '../../../src/types';
 
 describe('WalletServiceUtilities Integration Tests', () => {
-  let walletService: WalletServiceUtilities;
+  let walletService: WalletUtilityService;
 
   beforeAll(() => {
     if (!requireApiKey()) {

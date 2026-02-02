@@ -1,10 +1,12 @@
+import { TransactionNature, TransactionStatus, TransactionType } from "./enums/transaction.enum";
+
 export interface TransactionResponseDto {
   id: string;
   userId: string;
 
   amount: number; 
-  type: 'CREDIT' | 'DEBIT';
-  status: 'SUCCESS' | 'PENDING' | 'FAILED';
+  type: TransactionType;
+  status: TransactionStatus;
 
   reference: string;
   currency: string;
@@ -33,17 +35,17 @@ export interface TransactionDto {
   id: string;
 
   amount: number; 
-  type: 'CREDIT' | 'DEBIT';
-  status: 'SUCCESS' | 'PENDING' | 'FAILED';
+  type: TransactionType;
+  status: TransactionStatus;
 
-  currency: string;
+  currency?: string;
   reference: string;
-  fincraReference?: string;
   narration: string;
+  nature: TransactionNature;
 
-  user: any;        // you can refine later
+  user: any;
   wallet: any;
-  subwallet: any;
+  subwallet?: any;
   metadata?: any;
 
   createdAt: string;

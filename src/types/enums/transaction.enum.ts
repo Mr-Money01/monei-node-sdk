@@ -1,0 +1,41 @@
+export enum TransactionType {
+    DEBIT = 'DEBIT',
+    CREDIT = 'CREDIT',
+    PEER_TRANSFER = 'PEER-TRANSFER',
+}
+
+export enum TransactionStatus {
+    PENDING = 'PENDING',
+    SUCCESS = 'SUCCESS',
+    FAILED = 'FAILED',
+    COMPLETED = 'COMPLETED'
+}
+
+export enum TransactionOwnerType {
+  USER = 'USER',
+  BUSINESS_CUSTOMER = 'BUSINESS_CUSTOMER',
+}
+
+export enum TransactionNature {
+    FIAT_DEPOSIT = 'FIAT_DEPOSIT',         
+    FIAT_CARD_DEPOSIT = 'FIAT_CARD_DEPOSIT',
+    FIAT_USSD_DEPOSIT = 'FIAT_USSD_DEPOSIT',
+    FIAT_WITHDRAWAL = 'FIAT_WITHDRAWAL',   
+    FIAT_TRANSFER = 'FIAT_TRANSFER',      
+    FIAT_P2P = 'FIAT_P2P',                
+    
+    CRYPTO_DEPOSIT = 'CRYPTO_DEPOSIT',     
+    CRYPTO_WITHDRAWAL = 'CRYPTO_WITHDRAWAL',
+    CRYPTO_TRADE_BUY = 'CRYPTO_TRADE_BUY',  
+    CRYPTO_TRADE_SELL = 'CRYPTO_TRADE_SELL',
+    CRYPTO_P2P = 'CRYPTO_P2P',             
+    
+    CROSS_BORDER_IN = 'CROSS_BORDER_IN',   
+    CROSS_BORDER_OUT = 'CROSS_BORDER_OUT',
+    
+    FOREX_BUY = 'FOREX_BUY',            
+    FOREX_SELL = 'FOREX_SELL',             
+
+    BUY_TOKENIZED_STOCK = 'BUY_TOKENIZED_STOCK',
+    SELL_TOKENIZED_STOCK = 'SELL_TOKENIZED_STOCK',
+}

@@ -1,25 +1,18 @@
 import { describe, it, expect, beforeAll } from '@jest/globals';
-import { WalletServiceDeposit } from '../../../src/services/wallet-services/WalletService.Deposit';
+import { DepositService } from '../../../src/services/wallet/deposit.service';
 import { createTestWalletDeposit, requireApiKey } from '../../utils/test-setup';
 import {
-    authorizationDto,
-    AvsAddressDto,
-    AvsDto,
-    DepositMethod,
   FundWalletByNairaDto,
-  paymentDataDto,
-  PaymentLinkDataDto,
-  paymentLinkResponseDto,
-  paymentMethodDto,
   VerifyBankAccountRequestDto,
   VerifyBvnDto,
-  WalletDepositDataDto,
   WalletDepositDto,
   WithdrawWalletDto
 } from '../../../src/types';
+import { AuthType, DEPOSIT_METHOD } from '../../../src/types/enums/deposit.enum';
+import { AvsAddressDto, AvsDto, CreatePaymentLinkDto, DepositAuthorizationDto, DepositWithPaymentMethodDto, InitializeDepositDto } from '../../../src/types/deposit';
 
 describe('WalletServiceAccount Integration Tests', () => {
-  let walletService: WalletServiceDeposit;
+  let walletService: DepositService;
 
   beforeAll(() => {
     if (!requireApiKey()) {
@@ -33,8 +26,8 @@ describe('WalletServiceAccount Integration Tests', () => {
         if (!requireApiKey()) return;
   
         // Act
-        const method: DepositMethod  = 'CARD';
-        const depositData: WalletDepositDataDto = {
+        const method: DEPOSIT_METHOD  = DEPOSIT_METHOD.CARD;
+        const depositData: InitializeDepositDto = {
           amount: 1000,
           currency: "NGN",
           card: {
@@ -48,7 +41,7 @@ describe('WalletServiceAccount Integration Tests', () => {
           narration: "Payment transfer"
 
         };
-        const result = await walletService.depositWallet(method, depositData);
+        const result = await walletService.initializeDeposit(method, depositData);
         console.log('deposit wallet:', result);
   
         // Assert
@@ -88,19 +81,15 @@ describe('WalletServiceAccount Integration Tests', () => {
 
         
 
-        const authorizeData: authorizationDto = {
-
-            type: "pin",
-            reference: "unique-reference-00998",
-            pin: "2584",
-            otp: "123456",
-            avs: avsData
-
-
-
+        const authorizeData: DepositAuthorizationDto = {
+          type: AuthType.PIN,
+          reference: "unique-reference-00998",
+          pin: "2584",
+          otp: "123456",
+          avs: avsData
         }
   
-        // Act
+
         const result = await walletService.authorizeDeposit(authorizeData);
         console.log('authorize deposit:', result);
   
@@ -150,7 +139,7 @@ describe('WalletServiceAccount Integration Tests', () => {
         if (!requireApiKey()) return;
 
         // Arrange
-        const paymentData: paymentDataDto = {
+        const paymentData: DepositWithPaymentMethodDto = {
             
             paymentMethodId: 'd1e490eb-d634-4399-b09c-7f73d7323a98',
             amount: 5000,
@@ -163,7 +152,7 @@ describe('WalletServiceAccount Integration Tests', () => {
 
         
         // Act
-        const result = await walletService.createPayment(paymentData);
+        const result = await walletService.depositWithPaymentMethod(paymentData);
         console.log('make payment:', result);
   
         // Assert
@@ -180,7 +169,7 @@ describe('WalletServiceAccount Integration Tests', () => {
         if (!requireApiKey()) return;
 
         // Arrange
-      const paymentData: PaymentLinkDataDto = {
+      const paymentData: CreatePaymentLinkDto = {
         amount: 200,
         reference: "unique-reference-008996",
         redirectUrl: "https://citizen.com",
@@ -190,7 +179,7 @@ describe('WalletServiceAccount Integration Tests', () => {
       };
   
         // Act
-        const result = await walletService.getPaymentLink(paymentData);
+        const result = await walletService.generatePaymentLink(paymentData);
         console.log('Payment link:', result);
   
         // Assert

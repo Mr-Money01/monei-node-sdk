@@ -1,0 +1,7 @@
+export enum PaymentMethodType {
+    VIRTUAL_ACCOUNT = 'VIRTUAL_ACCOUNT',
+    CARD = 'CARD',
+    BANK_TRANSFER = 'BANK_TRANSFER',
+    USSD = 'USSD',
+    CRYPTO_WALLET = 'CRYPTO_WALLET'
+}
