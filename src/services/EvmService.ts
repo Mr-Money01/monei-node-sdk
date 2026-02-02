@@ -5,11 +5,16 @@ import {
   SendNativeTokenResponseDto,
   SendTokenDto,
   SendTokenResponseDto,
-  BalanceResponseDto
+  BalanceResponseDto,
+  SupportedNetworkResponseDto
 } from '../types';
 
 export class EvmService {
   constructor(private client: MoneiClient) {}
+
+  async getSupportedNetworks(): Promise<SupportedNetworkResponseDto> {
+    return this.client.get(`api/v1/evm/networks`);
+  }
 
   async getPortfolio(chainId: number): Promise<UserEvmPortfolioResponseDto> {
     return this.client.get<UserEvmPortfolioResponseDto>(`/api/v1/evm/portfolio/${chainId}`);

@@ -1,3 +1,17 @@
+export interface SupportedNetworkDto {
+  chainId: number;
+  name: string;
+  nativeToken: string;
+  blockExploreUrl: string;
+  isTestnet: boolean;
+}
+
+export interface SupportedNetworkResponseDto {
+  statusCode: number;
+  message: string;
+  data: SupportedNetworkDto[];
+}
+
 export interface UserTokenBalanceDto {
   contractAddress: string;
   name: string;

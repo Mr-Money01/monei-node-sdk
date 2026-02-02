@@ -4,7 +4,7 @@ import {
     VerifyBankAccountRequestDto,
 } from '../../types';
 
-export class WalletServiceUtilities {
+export class WalletUtilityService {
     constructor(private client: MoneiClient) { }
 
     async getBanks(): Promise<BankListResponseDto> {

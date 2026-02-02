@@ -1,15 +1,15 @@
 import { describe, it, expect, beforeAll } from '@jest/globals';
-import { WalletServiceUtilities } from '../../../src/services/wallet-services';
+import { WalletUtilityService } from '../../../src/services/wallet/WalletUtility.service';
 import { createTestWalletUtility, requireApiKey } from '../../utils/test-setup';
 import {
-  
+
   VerifyBankAccountRequestDto,
   VerifyBvnDto,
   WithdrawWalletDto
 } from '../../../src/types';
 
 describe('WalletServiceUtilities Integration Tests', () => {
-  let walletService: WalletServiceUtilities;
+  let walletService: WalletUtilityService;
 
   beforeAll(() => {
     if (!requireApiKey()) {
@@ -19,21 +19,21 @@ describe('WalletServiceUtilities Integration Tests', () => {
   });
 
   describe('getBanks', () => {
-      it('should get actual list of banks from API', async () => {
-        if (!requireApiKey()) return;
-  
-        // Act
-        const result = await walletService.getBanks();
-        console.log('Retrieved banks:', result);
+    it('should get actual list of banks from API', async () => {
+      if (!requireApiKey()) return;
 
-        // Assert
-        
-        
-        
-      }, 30000);
-    });
+      // Act
+      const result = await walletService.getBanks();
+      console.log('Retrieved banks:', result);
 
-    describe('verifyBankAccount', () => {
+      // Assert
+
+
+
+    }, 30000);
+  });
+
+  describe('verifyBankAccount', () => {
     it('should verify a test bank account', async () => {
       if (!requireApiKey()) return;
 
@@ -51,7 +51,7 @@ describe('WalletServiceUtilities Integration Tests', () => {
       expect(result.data).toHaveProperty('accountName');
       expect(result.data).toHaveProperty('accountNumber');
       expect(result.data).toHaveProperty('bankCode');
-      
+
       console.log('Verified account:', result);
     }, 30000);
   });

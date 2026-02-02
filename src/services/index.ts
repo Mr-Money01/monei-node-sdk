@@ -1,5 +1,7 @@
 export { UserService } from './UserService';
 export { WalletService } from './WalletService';
+export { WalletAccountService, DepositService, PayoutService, WalletUtilityService } from './wallet';
+export { PaymentMethodService } from './PaymentMethodService';
 export { EvmService } from './EvmService';
 export { SolanaService } from './SolanaService';
 export { TransactionService } from './TransactionService';

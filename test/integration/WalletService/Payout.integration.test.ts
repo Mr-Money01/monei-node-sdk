@@ -1,15 +1,10 @@
 import { describe, it, expect, beforeAll } from '@jest/globals';
 import { createTestWalletAccount, createTestWalletPayout, requireApiKey } from '../../utils/test-setup';
-import {
-  FundWalletByNairaDto,
-  VerifyBankAccountRequestDto,
-  VerifyBvnDto,
-  WithdrawWalletDto
-} from '../../../src/types';
-import { WalletServicePayouts } from '../../../src/services/wallet-services/WalletService.Payouts';
+import { PayoutService } from '../../../src/services/wallet/payout.service';
+import { BankTransferRequestDto } from '../../../src/types/payout';
 
 describe('WalletServiceAccount Integration Tests', () => {
-  let walletService: WalletServicePayouts;
+  let walletService: PayoutService;
 
   beforeAll(() => {
     if (!requireApiKey()) {
@@ -18,21 +13,20 @@ describe('WalletServiceAccount Integration Tests', () => {
     walletService = createTestWalletPayout();
   });
 
-  describe('withdrawFromWallet', () => {
+  describe('bankTransfer', () => {
     it('should send money to a bank account', async () => {
       if (!requireApiKey()) return;
 
-      const withdrawData: WithdrawWalletDto = {
+      const withdrawData: BankTransferRequestDto = {
         amount: 100,
         bank: "100004",
         accountNumber: "7032887129",
         transactionPin: "0990",
-        currency: "NGN",
         reference: "5434532fgdsgdsgkds65365326532",
         narration: "integration test"
       };
 
-      const result = await walletService.withdrawFromWallet(withdrawData);
+      const result = await walletService.bankTransfer(withdrawData);
 
       expect(result.statusCode).toBe(200);
       expect(result.data).toHaveProperty("reference");

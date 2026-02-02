@@ -1,8 +1,9 @@
 import { MoneiClient } from '../../src/client/MoneiClient';
 import { UserService } from '../../src/services/UserService';
-import { WalletServiceAccount } from '../../src/services/wallet-services/WalletService.Account';
-import { WalletServicePayouts } from '../../src/services/wallet-services/WalletService.Payouts';
-import { WalletServiceDeposit } from '../../src/services/wallet-services/WalletService.Deposit';
+import { WalletAccountService } from '../../src/services/wallet/WalletAccount.service';
+import { PayoutService } from '../../src/services/wallet/payout.service';
+import { DepositService } from '../../src/services/wallet/deposit.service';
+import { WalletUtilityService } from '../../src/services/wallet/WalletUtility.service';
 import { EvmService } from '../../src/services/EvmService';
 import { SolanaService } from '../../src/services/SolanaService';
 import { BillService } from '../../src/services/BillService';
@@ -11,7 +12,7 @@ import { MoneiConfig } from '../../src/types';
 import { TransactionService } from '../../src/services/TransactionService';
 //import { BillerDto, ElectricityCodesDto } from '../../src/types';   
 import dotenv from 'dotenv';
-import { WalletServiceUtilities } from '../../src/services/wallet-services/WalletService.Utilities';
+import { PaymentMethodService } from '../../src/services/PaymentMethodService';
 dotenv.config();
 
 
@@ -31,24 +32,29 @@ export const createTestUserService = (): UserService => {
   return new UserService(client);
 };
 
-export const createTestWalletAccount = (): WalletServiceAccount => {
+export const createTestWalletAccount = (): WalletAccountService => {
   const client = createTestClient();
-  return new WalletServiceAccount(client);
+  return new WalletAccountService(client);
 };
 
-export const createTestWalletUtility = (): WalletServiceUtilities => {
+export const createTestWalletUtility = (): WalletUtilityService => {
   const client = createTestClient();
-  return new WalletServiceUtilities(client);
+  return new WalletUtilityService(client);
 };
 
-export const createTestWalletPayout = (): WalletServicePayouts => {
+export const createTestWalletPayout = (): PayoutService => {
   const client = createTestClient();
-  return new WalletServicePayouts(client);
+  return new PayoutService(client);
 };
 
-export const createTestWalletDeposit = (): WalletServiceDeposit => {
+export const createPaymentMethodService = (): PaymentMethodService => {
   const client = createTestClient();
-  return new WalletServiceDeposit(client);
+  return new PaymentMethodService(client);
+}
+
+export const createTestWalletDeposit = (): DepositService => {
+  const client = createTestClient();
+  return new DepositService(client);
 };
 
 export const createTestEvmService = (): EvmService => {

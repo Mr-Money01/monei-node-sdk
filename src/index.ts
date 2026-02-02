@@ -3,6 +3,11 @@ import { MoneiConfig } from './types';
 import {
   UserService,
   WalletService,
+  DepositService,
+  WalletAccountService,
+  PayoutService,
+  WalletUtilityService,
+  PaymentMethodService,
   EvmService,
   SolanaService,
   TransactionService,
@@ -14,10 +19,15 @@ import {
 export class MoneiSDK {
   public user: UserService;
   public wallet: WalletService;
+  public deposit: DepositService;
+  public walletAccount: WalletAccountService;
+  public payout: PayoutService;
+  public walletUtility: WalletUtilityService;
+  public paymentMethod: PaymentMethodService;
   public evm: EvmService;
   public solana: SolanaService;
   public transactions: TransactionService;
-  public agent: AgentService;
+  //public agent: AgentService;
   public bills: BillService;
   public exchange: ExchangeService;
 
@@ -29,10 +39,15 @@ export class MoneiSDK {
     // Initialize all services
     this.user = new UserService(this.client);
     this.wallet = new WalletService(this.client);
+    this.deposit = new DepositService(this.client);
+    this.walletAccount = new WalletAccountService(this.client);
+    this.payout = new PayoutService(this.client);
+    this.walletUtility = new WalletUtilityService(this.client);
+    this.paymentMethod = new PaymentMethodService(this.client);
     this.evm = new EvmService(this.client);
     this.solana = new SolanaService(this.client);
     this.transactions = new TransactionService(this.client);
-    this.agent = new AgentService(this.client);
+    //this.agent = new AgentService(this.client);
     this.bills = new BillService(this.client);
     this.exchange = new ExchangeService(this.client);
   }

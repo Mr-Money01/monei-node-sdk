@@ -1,15 +1,9 @@
 import { describe, it, expect, beforeAll } from '@jest/globals';
-import { WalletServiceAccount } from '../../../src/services/wallet-services/WalletService.Account';
+import { WalletAccountService} from '../../../src/services/wallet/WalletAccount.service';
 import { createTestWalletAccount, requireApiKey } from '../../utils/test-setup';
-import {
-  FundWalletByNairaDto,
-  VerifyBankAccountRequestDto,
-  VerifyBvnDto,
-  WithdrawWalletDto
-} from '../../../src/types';
 
 describe('WalletServiceAccount Integration Tests', () => {
-  let walletService: WalletServiceAccount;
+  let walletService: WalletAccountService;
 
   beforeAll(() => {
     if (!requireApiKey()) {
