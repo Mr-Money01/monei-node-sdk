@@ -2,7 +2,7 @@ import { MoneiClient } from "../client/MoneiClient";
 import { ResponseDto } from "../types";
 import { PaymentMethodDto, PaymentMethodResponseDto, PaymentMethodsResponseDto } from "../types/payment-method";
 
-export class DepositService {
+export class PaymentMethodService {
   constructor(private client: MoneiClient) { }
 
   async getUserPaymentMethods(subWalletId: string): Promise<PaymentMethodsResponseDto> {

@@ -1,6 +1,6 @@
 # Mr. Monei Node.js SDK
 
-The official Node.js SDK for Monei API - providing seamless integration with Monei's comprehensive financial services including wallets, crypto transactions, bill payments, and AI agent.
+The official Node.js SDK for Monei API - providing seamless integration with Monei's comprehensive financial services including wallets, crypto transactions, bill payments, and exchanges.
 
 ## Installation
 
@@ -24,8 +24,8 @@ async function main() {
     const user = await sdk.user.getCurrentUser();
     console.log(`Welcome ${user.data.firstName} ${user.data.lastName}!`);
 
-    // Get wallet balance
-    const wallet = await sdk.wallet.getWalletBalance();
+    // Get wallet info
+    const wallet = await sdk.walletAccount.getWallet();
     console.log(`Naira Balance: ₦${wallet.nairaBalance.toLocaleString()}`);
 
   } catch (error) {
@@ -38,13 +38,12 @@ main();
 
 ## Features
 
-- **User Management** - Profile, KYC verification, user updates
+- **User Informations** - Profile
 - **Wallet Operations** - Balance, funding, withdrawals, peer transfers, bank verification
 - **EVM Wallets** - Ethereum, BSC, Polygon, Arbitrum support
 - **Solana Wallets** - SOL and SPL token management
 - **Bill Payments** - Airtime, data, electricity, cable TV
 - **Crypto Exchange** - Token swaps on EVM and Solana
-- **AI Agent** - Financial assistant with streaming support
 - **Transaction Management** - Transaction history and tracking
 - **Beneficiary Management** - Bank, crypto, and peer beneficiaries
 - **Full TypeScript Support** - Complete type definitions
@@ -58,22 +57,22 @@ import MoneiSDK from 'monei-sdk';
 
 const sdk = new MoneiSDK({ apiKey: 'your-api-key' });
 
-// Fund wallet
-const fundResult = await sdk.wallet.fundWalletByNaira({
+// Generate payment link
+const paymentResult = await sdk.deposit.generatePaymentLink({
   amount: 5000
 });
-console.log(`Funding link: ${fundResult.data.link}`);
+console.log(`Payment link: ${paymentResult.data.link}`);
 
 // Peer transfer
-await sdk.wallet.peerTransfer({
+await sdk.payout.peerTransfer({
   receiver: "user@example.com",
   amount: 1000,
   transactionPin: "123456"
 });
 
 // Get banks and verify account
-const banks = await sdk.wallet.getBanks();
-const account = await sdk.wallet.verifyBankAccount({
+const banks = await sdk.walletUtility.getBanks();
+const account = await sdk.walletUtility.verifyBankAccount({
   accountNumber: "1234567890",
   bank: "058" // GTBank code
 });
@@ -284,6 +283,10 @@ interface MoneiConfig {
 
 - `sdk.user` - User profile and management
 - `sdk.wallet` - Wallet and financial operations
+- `sdk.deposit` - Deposit operations through different channels
+- `sdk.payout` - Payout financial operations
+- `sdk.walletUtility` - Banking and wallet utilities
+- `sdk.paymentMethod` - Processing Financial operaios with payment methods(Automatic and recurrent charges)
 - `sdk.evm` - EVM blockchain operations
 - `sdk.solana` - Solana blockchain operations
 - `sdk.transactions` - Transaction history
