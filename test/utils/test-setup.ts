@@ -18,8 +18,8 @@ dotenv.config();
 
 export const createTestClient = (): MoneiClient => {
   const config: MoneiConfig = {
-    apiKey: process.env.DEV_API_KEY!,
-    baseUrl: process.env.MONEI_BASE_URL || 'https://api.dev.monei.cc',
+    apiKey: process.env.MMONNEI_API_KEY!,
+    baseUrl: process.env.MONEI_BASE_URL || 'https://api.monei.cc',
     timeout: 30000,
   };
 
