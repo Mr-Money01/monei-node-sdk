@@ -5,7 +5,7 @@ import { PaymentMethodDto, PaymentMethodResponseDto, PaymentMethodsResponseDto }
 export class PaymentMethodService {
   constructor(private client: MoneiClient) { }
 
-  async getUserPaymentMethods(subWalletId: string): Promise<PaymentMethodsResponseDto> {
+  async getPaymentMethods(subWalletId: string): Promise<PaymentMethodsResponseDto> {
     return this.client.get<PaymentMethodsResponseDto>('/api/v1/payment-methods', { params: { subWalletId } });
   }
 

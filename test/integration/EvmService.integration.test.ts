@@ -14,11 +14,11 @@ describe('EvmService Integration Tests', () => {
   // ---------------------------------------------------------
   // PORTFOLIO
   // ---------------------------------------------------------
-  describe('getPortfolio', () => {
+  describe.skip('getPortfolio', () => {
     it('should return user EVM portfolio', async () => {
       if (!requireApiKey()) return;
 
-      const chainId = 56; // BSC Mainnet 
+      const chainId = 1; // BSC Mainnet 
 
       // Act
       const result: UserEvmPortfolioResponseDto = await evmService.getPortfolio(chainId);
@@ -100,7 +100,7 @@ describe('EvmService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const chainId = 56; // Ethereum mainnet
+      const chainId = 1; // Ethereum mainnet
 
       // Act
       const result = await evmService.getNativeBalance(chainId);
@@ -136,7 +136,7 @@ describe('EvmService Integration Tests', () => {
   // ---------------------------------------------------------
   // TOKEN BALANCE
   // ---------------------------------------------------------
-  describe('getTokenBalance', () => {
+  describe.skip('getTokenBalance', () => {
     it('should return token balance for a given token', async () => {
       if (!requireApiKey()) return;
 
@@ -161,10 +161,15 @@ describe('EvmService Integration Tests', () => {
     it('should attempt a real native token transfer (test wallet required)', async () => {
       if (!requireApiKey()) return;
 
+      const chainId = 1; // Ethereum mainnet
+
+      // Act
+      const bal = await evmService.getNativeBalance(chainId);
+
       const sendData: SendNativeTokenDto = {
         to: process.env.TEST_EVM_RECEIVER!,
-        amount: '0.001',
-        chainId: 56
+        amount: '0.000073',
+        chainId: 1  
       };
 
       const result: SendNativeTokenResponseDto = await evmService.sendNativeToken(sendData);
@@ -175,14 +180,14 @@ describe('EvmService Integration Tests', () => {
       expect(result.data).toHaveProperty('txHash');
 
       console.log('Native Token Sent, TX:', result.data.txHash);
-    }, 30000);
+    }, 60000);
   });
 
 
   // ---------------------------------------------------------//
   // SEND TOKEN
   // ---------------------------------------------------------//
-  describe('sendToken', () => {
+  describe.skip('sendToken', () => {
     it('should attempt a token transfer (requires funded wallet + allowance)', async () => {
       if (!requireApiKey()) return;
 

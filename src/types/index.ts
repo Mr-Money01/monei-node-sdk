@@ -8,6 +8,7 @@ export interface ApiResponse<T> {
   statusCode: number;
   message: string;
   data: T;
+  errors?: {};
 }
 
 export interface PaginationParams {
@@ -23,3 +24,5 @@ export * from "./evm";
 export * from "./exchange";
 export * from "./transaction";
 export * from "./solana";
+export * from "./kyc";
+export * from "./offramp";

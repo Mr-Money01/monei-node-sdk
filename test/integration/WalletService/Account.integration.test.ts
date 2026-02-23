@@ -36,7 +36,7 @@ describe('WalletServiceAccount Integration Tests', () => {
         // Act
         const result = await walletService.createVirtualAccount({
 
-          nin: "11059990530",        
+          nin: "11059990539",        
 
         });
         

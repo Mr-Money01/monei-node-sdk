@@ -29,6 +29,7 @@ export interface BillerItemsResponseDto {
   statusCode: number;
   message: string;
   data: BillerDto[];
+  errors: {};
 }
 
 
@@ -43,6 +44,7 @@ export interface ElectricityBillerResponseDto {
   statusCode: number,
   message: string,
   data: ElectricityBillerDto[]
+  errors: {};
 }
 
 
@@ -121,6 +123,7 @@ export interface BillPaymentResponseDto {
   statusCode: number;
   message: string;
   data: BillPaymentDto;
+  errors: {};
 }
 
 export interface BillDto {
@@ -148,6 +151,7 @@ export interface BillResponseDto {
   statusCode: 200,
   message: string;
   data: BillDto;
+  errors?: {};
 }
 
 export interface PaginatedBillDto {
@@ -163,6 +167,7 @@ export interface PaginatedBillResponseDto {
   statusCode: number;
   message: string;
   data: PaginatedBillDto;
+  errors?: {};
 }
 
 export interface BillDataDto {

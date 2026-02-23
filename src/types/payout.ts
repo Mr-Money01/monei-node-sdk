@@ -20,7 +20,7 @@ export interface BankTransferResponseDto {
     statusCode: string;
     message: string;
     data: BankTransferResponseDataDto;
-    errors?: any;
+    errors?: {};
 }
 
 export interface PeerTransferDto {

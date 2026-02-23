@@ -1,25 +1,27 @@
 import { PaymentMethodType } from "./enums/payment-method";
-import { CardDto, UssdDto } from "./wallet";
+import { AddCardDto, AddUssdDto } from "./wallet";
 
 export interface PaymentMethodDto {
   type: PaymentMethodType;
   nickname?: string;
   subWalletId: string;
-  card?: CardDto;
+  card?: AddCardDto;
   virtualAccountId?: string;
-  ussd?: UssdDto;
+  ussd?: AddUssdDto;
 }
 
 export interface PaymentMethodResponseDto {
   statusCode: number;
   message: string;
   data: PaymentMethodDetailsDto;
+  errors?: {};
 }
 
 export interface PaymentMethodsResponseDto {
   statusCode: number;
   message: string;
   data: PaymentMethodDetailsDto[];
+  errors?: {};
 }
 
 

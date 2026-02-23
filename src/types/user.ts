@@ -27,4 +27,5 @@ export interface UserResponseDto {
   statusCode: number;
   message: string;
   data: UserDto;
+  errors?: {};
 }

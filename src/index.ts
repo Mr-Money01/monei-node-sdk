@@ -13,7 +13,8 @@ import {
   TransactionService,
   AgentService,
   BillService,
-  ExchangeService
+  ExchangeService,
+  wallet
 } from './services';
 
 export class MoneiSDK {

@@ -27,6 +27,7 @@ export interface UserTransactionsResponseDto {
   statusCode: number;
   message: string;
   data: UserTransactionsDataDto;
+  errors?: {};
 }
 
 

@@ -1,8 +1,8 @@
 import { AuthAction, AuthType } from "./enums/deposit.enum";
 import { TransactionStatus } from "./enums/transaction.enum";
-import { CardDto, UssdDto } from "./wallet";
+import { AddCardDto, AddUssdDto } from "./wallet";
 
-export interface CreatePaymentLinkDto {
+export interface GeneratePaymentLinkDto {
   amount: number;
   reference?: string;
   currency?: string;
@@ -21,7 +21,7 @@ interface Customer {
   name: string;
 }
 
-interface NextAction {
+interface DepositNextActionDto {
     type: AuthAction;
     redirect_url?: {
         url: string
@@ -31,17 +31,18 @@ interface NextAction {
     }
 }
 
-export interface InitializeDepositDto {
+export interface DepositDto {
   amount: number;
   reference?: string;
   currency?: 'NGN';
   narration?: string;
-  card?: CardDto;
-  ussd?: UssdDto;
+  card?: AddCardDto;
+  ussd?: AddUssdDto;
 }
 
-export interface DepositResponseDataDto {
+export interface PaymentDto {
     amount: number;
+    totalAmount:number;
     reference: string;
     currency: string;
     redirectUrl?: string;
@@ -54,20 +55,20 @@ export interface DepositResponseDataDto {
     expiry_datetime?: string
     note?: string;
     status: TransactionStatus;
-    nextAction?: NextAction;
+    nextAction?: DepositNextActionDto;
 }
 
-export interface DepositResponseDto {
+export interface PaymentResponseDto {
     statusCode: number;
     message: string;
-    data: DepositResponseDataDto;
+    data: PaymentDto;
     errors?: string;
 }
 
 export interface PaymentLinkResponseDto {
   statusCode: number;
   message: string;
-  data: LinkDto;
+  data: PaymentLinkDto;
   errors?: string;
 }
 
@@ -81,30 +82,23 @@ export interface DepositWithPaymentMethodDto {
   narration: string;
 }
 
-export interface PaymentResponseDto {
-  statusCode: number;
-  message: string;
-  data: LinkDto;
-  errors?: string;
-}
-
-export interface LinkDto {
+export interface PaymentLinkDto {
   link: string;
 }
 
-export interface DepositAuthorizationDto {
+export interface DepositAuthDto {
   type: AuthType;
   reference: string;
   pin: string;
   otp: string;
-  avs: AvsDto;
+  avs: FlwAvsAuthDto;
 }
 
-export interface AvsDto {
-  address: AvsAddressDto;
+export interface FlwAvsAuthDto {
+  address: FlwBillingAddressDto;
 }
 
-export interface AvsAddressDto {
+export interface FlwBillingAddressDto {
   city: string;
   country: string;
   line1: string;

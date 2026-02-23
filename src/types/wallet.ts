@@ -5,10 +5,33 @@ export enum DepositMethodsEnum {
 }
 
 
+export interface SubWalletDto {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedDate: string;
+  parentWalletId: string;
+  type: 'FIAT' | 'CRYPTO';
+  currency: string;
+  balance: number;
+  chain?: string;
+  publicAddress?: string;
+  evmPortfolio?: any;
+  solPortfolio?: any;
+}
+
+export interface SubWalletResponseDto {
+    statusCode: string;
+    message: string;
+    data: SubWalletDto;
+    errors:{};
+}
+
 export interface WalletDepositResponseDto {
   statusCode:string;
   message:string;
   data: WalletDepositDto
+  errors?: {};
 }
 
 export interface WalletDepositDto {
@@ -24,11 +47,10 @@ export interface ResponseDto {
   statusCode: number;
   message: string;
   data: any;
-  error?: any;
+  errors?: {};
 } 
 
-
-export interface CardDto {
+export interface AddCardDto {
   expiryMonth: string;
   expiryYear: string;
   cardNumber: string;
@@ -36,7 +58,7 @@ export interface CardDto {
   cardHolderName: string;
 }
 
-export interface UssdDto {
+export interface AddUssdDto {
   bankCode: string;
 }
 
@@ -48,6 +70,7 @@ export interface BalanceResponseDto {
   statusCode: number;
   message: string;
   data: BalanceDto;
+  errors?: {};
 }
 
 interface Customization {
@@ -77,21 +100,7 @@ export interface FundWalletByNairaResponseDto {
   statusCode: number;
   message: string;
   data: DepositResponseDto;
-}
-
-export interface SubWalletDto {
-  id: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedDate: string;
-  parentWalletId: string;
-  type: 'FIAT' | 'CRYPTO';
-  currency: string;
-  balance: number;
-  chain?: string;
-  publicAddress?: string;
-  evmPortfolio?: any;
-  solPortfolio?: any;
+  errors?: {};
 }
 
 export interface UserWalletDto {
@@ -105,6 +114,7 @@ export interface UserWalletResponseDto {
   statusCode: number;
   message: string;
   data: UserWalletDto;
+  errors?: {};
 }
 
 export interface BankDto {
@@ -117,6 +127,7 @@ export interface BankListResponseDto {
   statusCode: number;
   message: string;
   data: BankDto[];
+  errors?: {};
 }
 
 export interface VerifyBankAccountRequestDto {
@@ -135,6 +146,7 @@ export interface BankAccountResponseDto {
   statusCode: number;
   message: string;
   data: BankAccountDto;
+  errors?: {};
 }
 
 export interface WithdrawWalletDto {
@@ -188,6 +200,7 @@ export interface WalletResponseDto {
   statusCode: number;
   message: string;
   data: WithdrawDto;
+  errors?: {};
 }
 
 export interface WalletOverviewDto {
@@ -274,6 +287,7 @@ export interface VirtualAccountResponseDto {
   statusCode: number;
   message: string;
   data: VirtualAccountDto;
+  errors?: {};
 }
 
 export interface VirtualAccountDto {
@@ -281,7 +295,6 @@ export interface VirtualAccountDto {
   createdAt: string;
   updatedAt: string;
   deletedDate: string | null;
-
   accountNumber: string;
   bankName: string;
   reference: string;
@@ -298,10 +311,6 @@ export interface virtualSubWalletDto {
   publicAddress: string | null;
 }
 
-
-
-
-
 export interface TransferDto {
   receiver: string;
   amount: number;
@@ -309,7 +318,19 @@ export interface TransferDto {
   currency: string;
 }
 
+export interface DepositAuthResponseDto {
+    statusCode: number;
+    message: string;
+    data: {};
+    errors: {};
+}
 
+export interface StatusResponseDto {
+    statusCode: number;
+    message: string;
+    data: {};
+    errors: {};
+}
 
 
 

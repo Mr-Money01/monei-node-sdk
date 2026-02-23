@@ -7,7 +7,8 @@ import {
   TxHashResponseDto,
   SwapSolToTokenDto,
   SwapResponseDto,
-  SwapTokenToSolDto
+  SwapTokenToSolDto,
+  EvmTokenToTokenDto
 } from '../types';
 
 export class ExchangeService {
@@ -22,11 +23,11 @@ export class ExchangeService {
     return this.client.post<TxHashResponseDto>('/api/v1/evm-exchange/native-to-token', swapData);
   }
 
-  async getTokenToTokenPrice(quoteData: SwapTokenToTokenDto): Promise<PriceResponseDto> {
+  async getTokenToTokenPrice(quoteData: EvmTokenToTokenDto): Promise<PriceResponseDto> {
     return this.client.post<PriceResponseDto>('/api/v1/evm-exchange/price/token-to-token', quoteData);
   }
 
-  async swapTokenToToken(swapData: SwapTokenToTokenDto): Promise<TxHashResponseDto> {
+  async swapTokenToToken(swapData: EvmTokenToTokenDto): Promise<TxHashResponseDto> {
     return this.client.post<TxHashResponseDto>('/api/v1/evm-exchange/token-to-token', swapData);
   }
 

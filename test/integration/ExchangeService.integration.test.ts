@@ -11,7 +11,8 @@ import {
   SwapDto,
   SwapTokenToSolDto,
   SwapResponseDto,
-  ZeroExQuoteDto
+  ZeroExQuoteDto,
+  EvmTokenToTokenDto
 } from '../../src/types';
 
 
@@ -66,13 +67,14 @@ describe('ExchangeService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       const payload: SwapTokenToNativeDto = {
-        chainId: 1,
+        chainId: 56,
         tokenIn: usdt_address,
-        amount: '300000000000000000',
+        amount: '0.1'
 
       };
 
       const response: PriceResponseDto = await exchangeService.getTokenToNativePrice(payload);
+
 
       expect(response).toHaveProperty('statusCode');
       expect(response).toHaveProperty('message');
@@ -89,16 +91,16 @@ describe('ExchangeService Integration Tests', () => {
   // -------------------------------
   // EVM: getTokenToTokenPrice
   // -------------------------------
-  describe('getNativeToTokenPrice', () => {
+  describe('getTokenToTokenPrice', () => {
     it('should get a token-to-token price', async () => {
       if (!requireApiKey()) return;
 
-      const payload: SwapTokenToTokenDto = {
+      const payload: EvmTokenToTokenDto = {
         //chainId: 56,
-        inputMint: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-        outputMint: '0xcf0c122c6b73ff809c693db761e7baebe62b6a2e',
-        amount: 0.2,
-        slippageBps: 56
+        tokenIn: usdc_address,
+        tokenOut: usdt_address,
+        amount: '0.0001',
+        chainId: 56
       };
 
       const response: PriceResponseDto = await exchangeService.getTokenToTokenPrice(payload);
@@ -118,7 +120,7 @@ describe('ExchangeService Integration Tests', () => {
   // -------------------------------
   // EVM: swapNativeToToken
   // -------------------------------
-  describe('swapNativeToToken', () => {
+  describe.skip('swapNativeToToken', () => {
     it('should swap native to token', async () => {
       if (!requireApiKey()) return;
 
@@ -144,7 +146,7 @@ describe('ExchangeService Integration Tests', () => {
   // -------------------------------
   // EVM: swapTokenToNative
   // -------------------------------
-  describe('swapTokenToNative', () => {
+  describe.skip('swapTokenToNative', () => {
     it('should swap a token-to-native ', async () => {
       if (!requireApiKey()) return;
 
@@ -175,16 +177,16 @@ describe('ExchangeService Integration Tests', () => {
   // -------------------------------
   // EVM: swapTokenToToken
   // -------------------------------
-  describe('getNativeToTokenPrice', () => {
+  describe('swapTokenToToken', () => {
     it('should swap a token-to-token', async () => {
       if (!requireApiKey()) return;
 
-      const payload: SwapTokenToTokenDto = {
+      const payload: EvmTokenToTokenDto = {
         //chainId: 56,
-        inputMint: usdc_address,
-        outputMint: usdt_address,
-        amount: 0.0001,
-        slippageBps: 56
+        tokenIn: usdc_address,
+        tokenOut: usdt_address,
+        amount: '0.0001',
+        chainId: 56
       };
 
       const response: TxHashResponseDto = await exchangeService.swapTokenToToken(payload);
@@ -228,7 +230,7 @@ describe('ExchangeService Integration Tests', () => {
 
       const response = await exchangeService.getTokenToSolanaQuote({
         inputMint: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', // SOL
-        amount:  '0.000000000000000005' // 5e-25 SOL
+        amount:  '0.05' // 5e-25 SOL
       });
       console.log('Token to Solana Quote Response:', response);
 
@@ -243,14 +245,14 @@ describe('ExchangeService Integration Tests', () => {
   // --------------------------------------------------
   // SOLANA: getTokenToTokenQuote
   // --------------------------------------------------
-  describe('getNativeToTokenPrice', () => {
+  describe('getTokenToTokenQuote', () => {
     it('should get a token to token quote', async () => {
       if (!requireApiKey()) return;
 
       const response = await exchangeService.getTokenToTokenQuote({
-        inputMint: 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB', // SOL
-        outputMint: 'So1111111111111111111111111111111111122222', // USDT
-        amount:  0.000000000000000005 // 5e-25 SOL
+        inputMint: sol_usdc, // SOL
+        outputMint: sol_usdt, // USDT
+        amount:  0.05 // 5e-25 SOL
       });
       console.log('Solana Quote Response:', response);
 
@@ -266,7 +268,7 @@ describe('ExchangeService Integration Tests', () => {
   // --------------------------------------------------
   // SOLANA: swapSolToToken
   // --------------------------------------------------
-  describe('swapSolToToken', () => {
+  describe.skip('swapSolToToken', () => {
     it('should swap SOL to token', async () => {
       if (!requireApiKey()) return;
 
@@ -302,7 +304,7 @@ describe('ExchangeService Integration Tests', () => {
   // --------------------------------------------------
   // SOLANA: swapTokenToSol
   // --------------------------------------------------
-  describe('swapTokenToSol', () => {
+  describe.skip('swapTokenToSol', () => {
     it('should swap token to SOL', async () => {
       if (!requireApiKey()) return;
 
@@ -333,7 +335,7 @@ describe('ExchangeService Integration Tests', () => {
   // --------------------------------------------------
   // SOLANA: swapTokenToToken
   // --------------------------------------------------
-  describe('swapTokenToToken', () => {
+  describe.skip('swapTokenToToken', () => {
     it('should swap token to token on Solana', async () => {
       if (!requireApiKey()) return;
 

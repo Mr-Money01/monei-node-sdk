@@ -22,6 +22,7 @@ export interface initializeConversationDto {
   statusCode: number;
   message: string;
   data: ConversationDto;
+  errors: {};
 }
 
 export interface ConversationDto {

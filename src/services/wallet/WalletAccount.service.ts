@@ -2,7 +2,6 @@ import { MoneiClient } from '../../client/MoneiClient';
 import {
   CreateVirtualAccountDataDto,
   UserWalletResponseDto,
-  VirtualAccountDto,
   VirtualAccountResponseDto,
 } from '../../types';
 

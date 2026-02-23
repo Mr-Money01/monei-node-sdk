@@ -10,6 +10,7 @@ export interface SupportedNetworkResponseDto {
   statusCode: number;
   message: string;
   data: SupportedNetworkDto[];
+  errors?: {};
 }
 
 export interface UserTokenBalanceDto {
@@ -40,6 +41,7 @@ export interface UserEvmPortfolioResponseDto {
   statusCode: number;
   message: string;
   data: UserEvmPortfolioDto;
+  errors?: {};
 }
 
 export interface SendNativeTokenDto {
@@ -63,10 +65,12 @@ export interface SendNativeTokenResponseDto {
   statusCode: number;
   message: string;
   data: TransactionResponse;
+  errors?: {};
 }
 
 export interface SendTokenResponseDto {
   statusCode: number;
   message: string;
   data: TransactionResponse;
+  errors?: {};
 }

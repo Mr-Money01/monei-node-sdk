@@ -8,7 +8,14 @@ export interface SwapTokenToTokenDto {
   inputMint: string;
   outputMint: string;
   amount: number;
-  slippageBps?: number;
+  chainId?: number;
+}
+
+export interface EvmTokenToTokenDto {
+  tokenIn: string;
+  tokenOut: string;
+  amount: string;
+  chainId?: number;
 }
 
 export interface SwapTokenToNativeDto {
@@ -27,6 +34,7 @@ export interface PriceResponseDto {
   statusCode: number;
   message: string;
   data: ZeroExQuoteDto;
+  errors?: {};
 }
 
 export interface TxHashDto {

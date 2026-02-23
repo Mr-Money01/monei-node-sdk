@@ -8,6 +8,7 @@ export interface WalletAddressResponseDto {
   statusCode: number;
   message: string;
   data: AddressDto;
+  errors?: {};
 }
 
 export interface TokenInfoDto {
@@ -35,6 +36,7 @@ export interface PortfolioResponseDto {
   statusCode: number;
   message: string;
   data: PortfolioDto;
+  errors?: {};
 }
 
 export interface TransferSolDto {
@@ -58,4 +60,5 @@ export interface SignatureResponseDto {
   statusCode: number;
   message: string;
   data: SignatureDto;
+  errors?: {};
 }

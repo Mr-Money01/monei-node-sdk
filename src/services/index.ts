@@ -8,3 +8,4 @@ export { TransactionService } from './TransactionService';
 export { AgentService } from './AgentService';
 export { BillService } from './BillService';
 export { ExchangeService } from './ExchangeService';
+export { OfframpExchangeService,OfframpLedgerService,OfframpLayoutService } from './offramp';

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from '@jest/globals';
-import { DepositService } from '../../../src/services/wallet/deposit.service';
+import { DepositService } from '../../../src/services/wallet';
 import { createTestWalletDeposit, requireApiKey } from '../../utils/test-setup';
 import { AuthType, DEPOSIT_METHOD } from '../../../src/types/enums/deposit.enum';
 import { AvsAddressDto, AvsDto, CreatePaymentLinkDto, DepositAuthorizationDto, DepositWithPaymentMethodDto, InitializeDepositDto } from '../../../src/types/deposit';
@@ -77,7 +77,7 @@ describe('WalletServiceAccount Integration Tests', () => {
         const authorizeData: DepositAuthorizationDto = {
           type: AuthType.PIN,
           reference: "unique-reference-00998",
-          pin: "2584",
+          pin: "",
           otp: "123456",
           avs: avsData
         }

@@ -9,8 +9,7 @@ import { SolanaService } from '../../src/services/SolanaService';
 import { BillService } from '../../src/services/BillService';
 import { ExchangeService } from '../../src/services/ExchangeService';
 import { MoneiConfig } from '../../src/types';
-import { TransactionService } from '../../src/services/TransactionService';
-//import { BillerDto, ElectricityCodesDto } from '../../src/types';   
+import { TransactionService } from '../../src/services/TransactionService';   
 import dotenv from 'dotenv';
 import { PaymentMethodService } from '../../src/services/PaymentMethodService';
 dotenv.config();
@@ -19,7 +18,7 @@ dotenv.config();
 
 export const createTestClient = (): MoneiClient => {
   const config: MoneiConfig = {
-    apiKey: process.env.MMONNEI_API_KEY!,
+    apiKey: process.env.MONEI_API_KEY2!,
     baseUrl: process.env.MONEI_BASE_URL || 'https://api.monei.cc',
     timeout: 30000,
   };
@@ -86,7 +85,7 @@ export const createTestTransactionService = (): TransactionService => {
 
 // Helper to skip tests if no API key is set
 export const requireApiKey = () => {
-  if (!process.env.MONEI_API_KEY) {
+  if (!process.env.MONEI_API_KEY2) {
     console.warn('MONEI_API_KEY not set. Skipping integration tests.');
     return false;
   }
