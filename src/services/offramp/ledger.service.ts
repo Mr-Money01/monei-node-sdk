@@ -1,22 +1,17 @@
 import { MoneiClient } from '../../client/MoneiClient';
 import {
-    OfframpHistoryRequestDto,OfframpHistoryResponseDto,OfframpStatusResponseDto,OfframpStatusRequestDto
-  
-} from '../../types';
+    OfframpHistoryRequestDto,OfframpStatusRequestDto, OfframpTransactionListResponseDto, OfframpTransactionDetailResponseDto} from '../../types';
 
 export class OfframpLedgerService {
   constructor(private client: MoneiClient) {}
 
 
-  async getOfframpHistory(requestData:OfframpHistoryRequestDto ): Promise<OfframpHistoryResponseDto> {
-    return this.client.post<OfframpHistoryResponseDto>('/api/v1/offramp/ledger/history', requestData);
+  async getTransactions(requestData:OfframpHistoryRequestDto ): Promise<OfframpTransactionListResponseDto> {
+    return this.client.post<OfframpTransactionListResponseDto>('/api/v1/offramp/ledger/history', requestData);
   }
 
-  async getOfframpStatus(reference: OfframpStatusRequestDto): Promise<OfframpStatusResponseDto> {
-    return this.client.post<OfframpStatusResponseDto>(`/api/v1/offramp/ledger/status/${reference}`);
+  async trackOrder(reference: OfframpStatusRequestDto): Promise<OfframpTransactionDetailResponseDto> {
+    return this.client.post<OfframpTransactionDetailResponseDto>(`/api/v1/offramp/ledger/status/${reference}`);
   }
 
- 
-
- 
 }

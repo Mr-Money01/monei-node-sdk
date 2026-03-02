@@ -5,25 +5,25 @@ import { PaymentMethodDto, PaymentMethodResponseDto, PaymentMethodsResponseDto }
 export class PaymentMethodService {
   constructor(private client: MoneiClient) { }
 
-  async getPaymentMethods(subWalletId: string): Promise<PaymentMethodsResponseDto> {
+  async getAll(subWalletId: string): Promise<PaymentMethodsResponseDto> {
     return this.client.get<PaymentMethodsResponseDto>('/api/v1/payment-methods', { params: { subWalletId } });
   }
 
-  async createPaymentMethod(
+  async create(
     paymentMethodData: PaymentMethodDto): Promise<PaymentMethodResponseDto> {
     return this.client.post<PaymentMethodResponseDto>('/api/v1/payment-methods', paymentMethodData );
   }
 
 
-  async getPaymentMethodDetails(id: string): Promise<PaymentMethodResponseDto> {
+  async get(id: string): Promise<PaymentMethodResponseDto> {
     return this.client.get<PaymentMethodResponseDto>(`/api/v1/payment-methods/${id}`);
   }
 
-  async deleteUserPaymentMethods(id: string): Promise<ResponseDto> {
+  async delete(id: string): Promise<ResponseDto> {
     return this.client.delete<ResponseDto>(`/api/v1/payment-methods/${id}`);
   }
 
-  async setDefaultPaymentMethod(id: string): Promise<PaymentMethodResponseDto> {
+  async setDefault(id: string): Promise<PaymentMethodResponseDto> {
     return this.client.patch<PaymentMethodResponseDto>(`/api/v1/payment-methods/${id}/default`);
   }
 }

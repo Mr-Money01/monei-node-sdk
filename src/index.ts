@@ -14,8 +14,17 @@ import {
   AgentService,
   BillService,
   ExchangeService,
-  wallet
+  BillDiscoveryService,
+  BillPayService,
+  BillRecordsService,
+  BillValidateService,
+  OfframpExchangeService,
+  OfframpLedgerService,
+  OfframpPayoutService,
+  BusinessService
+  
 } from './services';
+
 
 export class MoneiSDK {
   public user: UserService;
@@ -31,6 +40,14 @@ export class MoneiSDK {
   //public agent: AgentService;
   public bills: BillService;
   public exchange: ExchangeService;
+  public billsDiscovery: BillDiscoveryService;
+  public offrampPayouts: OfframpPayoutService;
+  public billsPay: BillPayService;
+  public offrampLedger: OfframpLedgerService;
+  public billsRecords: BillRecordsService;
+  public offrampExchange: OfframpExchangeService;
+  public billsValidation: BillValidateService;
+  public business: BusinessService;
 
   private client: MoneiClient;
 
@@ -51,6 +68,14 @@ export class MoneiSDK {
     //this.agent = new AgentService(this.client);
     this.bills = new BillService(this.client);
     this.exchange = new ExchangeService(this.client);
+    this.billsDiscovery = new BillDiscoveryService(this.client);
+    this.offrampPayouts = new OfframpPayoutService(this.client);
+    this.billsPay = new BillPayService(this.client);
+    this.offrampLedger = new OfframpLedgerService(this.client);
+    this.billsRecords = new BillRecordsService(this.client);
+    this.offrampExchange = new OfframpExchangeService(this.client);
+    this.billsValidation = new BillValidateService(this.client);
+    this.business = new BusinessService(this.client);
   }
 
   // Helper methods for authentication

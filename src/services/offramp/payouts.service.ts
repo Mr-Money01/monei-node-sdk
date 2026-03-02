@@ -1,21 +1,18 @@
 import { MoneiClient } from '../../client/MoneiClient';
 import {
-    OfframpBanksResponseDto,VerifyOfframpBankResponseDto,VerifyOfframpBankRequesteDto
-  
+    PayoutBanksResponseDto,VerifyOfframpBankAccountResponseDto, VerifyOfframpBankAccountRequestDto
 } from '../../types';
 
-export class OfframpLayoutService {
+export class OfframpPayoutService {
   constructor(private client: MoneiClient) {}
 
 
-  async getOfframpBanks(): Promise<OfframpBanksResponseDto> {
-    return this.client.post<OfframpBanksResponseDto>('/api/v1/offramp/payouts/banks');
+  async getBanks(): Promise<PayoutBanksResponseDto> {
+    return this.client.post<PayoutBanksResponseDto>('/api/v1/offramp/payouts/banks');
   }
 
-  async verifyOfframpBank(data:VerifyOfframpBankRequesteDto): Promise<VerifyOfframpBankResponseDto> {
-    return this.client.post<VerifyOfframpBankResponseDto>('/api/v1/offramp/payouts/verify', data);
+  async verifyBankAccount(data:VerifyOfframpBankAccountRequestDto): Promise<VerifyOfframpBankAccountResponseDto> {
+    return this.client.post<VerifyOfframpBankAccountResponseDto>('/api/v1/offramp/payouts/verify', data);
   }
-
- 
  
 }

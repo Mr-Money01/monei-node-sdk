@@ -8,4 +8,11 @@ export { TransactionService } from './TransactionService';
 export { AgentService } from './AgentService';
 export { BillService } from './BillService';
 export { ExchangeService } from './ExchangeService';
-export { OfframpExchangeService,OfframpLedgerService,OfframpLayoutService } from './offramp';
+export { OfframpExchangeService,OfframpLedgerService,OfframpPayoutService } from './offramp';
+export { BillDiscoveryService, BillPayService, BillRecordsService,BillValidateService } from './bills';
+export { BusinessService } from './BusinessService';
+
+
+
+
+

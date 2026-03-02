@@ -1,9 +1,7 @@
 import { MoneiClient } from '../client/MoneiClient';
 import {
-  BalanceResponseDto,
   FundWalletByNairaDto,
   FundWalletByNairaResponseDto,
-  UserWalletDto,
   BankListResponseDto,
   VerifyBankAccountRequestDto,
   BankAccountResponseDto,

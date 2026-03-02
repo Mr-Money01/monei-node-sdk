@@ -1,12 +1,9 @@
 import { MoneiClient } from '../client/MoneiClient';
 import {
-  CreateCustomerDto,
-  UpdateCustomerDto,
-  CustomerResponseDto,
-  CustomerListResponseDto
+  CreateCustomerDto, UpdateCustomerDto
 } from '../types';
 
-export class CustomerService { // Renamed to be more accurate
+export class BusinessService { // Renamed to be more accurate
   constructor(private client: MoneiClient) {}
 
   /**
@@ -17,8 +14,8 @@ export class CustomerService { // Renamed to be more accurate
   async createBusinessCustomer(
     business_id: string, 
     createData: CreateCustomerDto
-  ): Promise<CustomerResponseDto> {
-    return this.client.post<CustomerResponseDto>(
+  ): Promise<any> {
+    return this.client.post<any>(
       `/api/v1/customers/${business_id}`,
       createData // Add request body
     );
@@ -30,8 +27,8 @@ export class CustomerService { // Renamed to be more accurate
    */
   async getBusinessCustomers(
     business_id: string
-  ): Promise<CustomerListResponseDto> {
-    return this.client.get<CustomerListResponseDto>(
+  ): Promise<any> {
+    return this.client.get<any>(
       `/api/v1/customers/${business_id}`
     );
   }
@@ -44,8 +41,8 @@ export class CustomerService { // Renamed to be more accurate
   async getCustomerDetails(
     business_id: string, 
     customer_id: string
-  ): Promise<CustomerResponseDto> {
-    return this.client.get<CustomerResponseDto>(
+  ): Promise<any> {
+    return this.client.get<any>(
       `/api/v1/customers/${business_id}/${customer_id}`
     );
   }
@@ -60,8 +57,8 @@ export class CustomerService { // Renamed to be more accurate
     business_id: string, 
     customer_id: string,
     updateData: UpdateCustomerDto
-  ): Promise<CustomerResponseDto> {
-    return this.client.patch<CustomerResponseDto>(
+  ): Promise<any> {
+    return this.client.patch<any>(
       `/api/v1/customers/${business_id}/${customer_id}`,
       updateData // Add request body
     );
@@ -75,8 +72,8 @@ export class CustomerService { // Renamed to be more accurate
   async disableCustomer(
     business_id: string, 
     customer_id: string
-  ): Promise<CustomerResponseDto> {
-    return this.client.patch<CustomerResponseDto>(
+  ): Promise<any> {
+    return this.client.patch<any>(
       `/api/v1/customers/${business_id}/${customer_id}/disable`
       // Note: Added /disable endpoint if that's the correct path
     );

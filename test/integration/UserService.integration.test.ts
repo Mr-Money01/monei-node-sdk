@@ -1,6 +1,7 @@
 import { UserService } from '../../src/services/UserService';
 import { createTestUserService, requireApiKey } from '../utils/test-setup';
 import { UserResponseDto, UpdateUserDto } from '../../src/types';
+import { describe, it, expect, beforeAll } from '@jest/globals';
 
 describe('UserService Integration Tests', () => {
   let userService: UserService;
@@ -65,4 +66,30 @@ describe('UserService Integration Tests', () => {
       expect(result.data.phone).toBe(updateData.phone);
     }, 30000);
   });
+
+  
+
+  describe('kycStatus', () => {
+    it('should get user kyc status', async () => {
+      if (!requireApiKey()) return;
+
+      // First, get current user to have a valid ID
+      const kycStatus = await userService.kycStatus();
+
+      console.log('KYC Status:', kycStatus);
+      
+
+      
+
+      // Act
+      const limit = await userService.getDepositLimit();
+
+      console.log('Limits:', limit);
+      
+
+      
+    }, 30000);
+  });
+
+
 });

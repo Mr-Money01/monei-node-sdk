@@ -88,8 +88,8 @@ export interface OfframpOrderResponseDataDto {
   amounts: AmountsDto;
   beneficiary: BeneficiaryDto;
   onChain: OnChainDto;
-  provider: Providers;
-  providerReference: string;
+  //provider: Providers;
+  //providerReference: string;
   meta?: Record<string, any>;
   failureReason?: string;
   timestamps: TimestampsDto;

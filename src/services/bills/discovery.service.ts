@@ -9,7 +9,7 @@ import {
 export class BillDiscoveryService {
   constructor(private client: MoneiClient) {}
 
-  async getBillerItems(category: BillCategory, billerName: string): Promise<BillerItemsResponseDto> {
+  async getBiller(category: BillCategory, billerName: string): Promise<BillerItemsResponseDto> {
     return this.client.get<BillerItemsResponseDto>(`/api/v1/bills/discovery/biller-items/${category}/${billerName}`);
   }
 
