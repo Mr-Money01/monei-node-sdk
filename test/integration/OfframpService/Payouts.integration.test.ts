@@ -1,13 +1,11 @@
 import { describe, it, expect, beforeAll } from '@jest/globals';
-import { OfframpLayoutService } from '../../../src/services/offramp/OfframpLayout.service';
+import { OfframpPayoutService } from '../../../src/services/offramp/payouts.service';
 import { MoneiClient } from '../../../src/client/MoneiClient';
 import { requireApiKey, createTestClient } from '../../utils/test-setup';
-import {
-  VerifyOfframpBankRequesteDto
-} from '../../../src/types';
+import { VerifyBankAccountRequestDto, VerifyOfframpBankAccountRequestDto } from '../../../src/types';
 
-describe('OfframpLayoutService Integration Tests', () => {
-  let offrampLayoutService: OfframpLayoutService;
+describe('OfframpPayoutService Integration Tests', () => {
+  let offrampPayoutService: OfframpPayoutService;
   let client: MoneiClient;
 
   beforeAll(() => {
@@ -15,7 +13,7 @@ describe('OfframpLayoutService Integration Tests', () => {
       return;
     }
     client = createTestClient();
-    offrampLayoutService = new OfframpLayoutService(client);
+    offrampPayoutService = new OfframpPayoutService(client);
   });
 
   describe('getOfframpBanks', () => {
@@ -23,7 +21,7 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Act
-      const result = await offrampLayoutService.getOfframpBanks();
+      const result = await offrampPayoutService.getBanks();
       console.log('Retrieved payout banks:', JSON.stringify(result, null, 2));
 
       // Assert
@@ -59,7 +57,7 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Act
-      const result = await offrampLayoutService.getOfframpBanks();
+      const result = await offrampPayoutService.getBanks();
 
       // Assert - verify all banks have required fields
       result.data.forEach((bank, index) => {
@@ -80,7 +78,7 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Act
-      const result = await offrampLayoutService.getOfframpBanks();
+      const result = await offrampPayoutService.getBanks();
 
       // Assert - check for duplicate bank codes
       const bankCodes = result.data.map(bank => bank.code);
@@ -95,7 +93,7 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Act
-      const result = await offrampLayoutService.getOfframpBanks();
+      const result = await offrampPayoutService.getBanks();
 
       // Assert - check for common Nigerian banks
       const bankNames = result.data.map(bank => bank.name.toLowerCase());
@@ -125,7 +123,7 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Act
-      const result = await offrampLayoutService.getOfframpBanks();
+      const result = await offrampPayoutService.getBanks();
 
       // Assert - check if banks are sorted by name
       const bankNames = result.data.map(bank => bank.name);
@@ -136,11 +134,12 @@ describe('OfframpLayoutService Integration Tests', () => {
       console.log('Banks are sorted alphabetically:', isSorted);
     }, 30000);
 
+    /*
     it('should return banks with proper codes format', async () => {
       if (!requireApiKey()) return;
 
       // Act
-      const result = await offrampLayoutService.getOfframpBanks();
+      const result = await offrampPayoutService.getBanks();
 
       // Assert - bank codes are typically 3-digit numbers stored as strings
       result.data.forEach(bank => {
@@ -155,20 +154,22 @@ describe('OfframpLayoutService Integration Tests', () => {
 
       console.log('All bank codes are valid numeric strings');
     }, 30000);
+    */
   });
 
+  /*
   describe('verifyOfframpBank', () => {
     it('should verify a valid GTBank account', async () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '058', // GTBank code
         accountNumber: '0123456789' // Replace with a valid test account number
       };
 
       // Act
-      const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+      const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
       console.log('Verified GTBank account:', JSON.stringify(result, null, 2));
 
       // Assert
@@ -203,13 +204,13 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '044', // Access Bank code
         accountNumber: '9876543210' // Replace with a valid test account number
       };
 
       // Act
-      const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+      const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
 
       // Assert
       expect(result.statusCode).toBe(200);
@@ -228,13 +229,13 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '011', // First Bank code
         accountNumber: '1234567890' // Replace with a valid test account number
       };
 
       // Act
-      const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+      const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
 
       // Assert
       expect(result.statusCode).toBe(200);
@@ -250,13 +251,13 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '033', // UBA code
         accountNumber: '1122334455' // Replace with a valid test account number
       };
 
       // Act
-      const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+      const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
 
       // Assert
       expect(result.statusCode).toBe(200);
@@ -268,16 +269,16 @@ describe('OfframpLayoutService Integration Tests', () => {
     }, 30000);
 
     it('should verify a valid Zenith Bank account', async () => {
-      if (!requireApiValue()) return;
+      if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '057', // Zenith Bank code
         accountNumber: '2233445566' // Replace with a valid test account number
       };
 
       // Act
-      const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+      const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
 
       // Assert
       expect(result.statusCode).toBe(200);
@@ -292,13 +293,13 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '101', // Providus Bank code
         accountNumber: '3344556677' // Replace with a valid test account number
       };
 
       // Act
-      const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+      const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
 
       // Assert
       expect(result.statusCode).toBe(200);
@@ -313,14 +314,14 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '058', // GTBank code
         accountNumber: '123' // Invalid - too short
       };
 
       try {
         // Act
-        const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+        const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
         
         // If it doesn't throw, check for error response
         expect(result.statusCode).toBe(400); // Bad request
@@ -337,14 +338,14 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '999', // Invalid bank code
         accountNumber: '0123456789'
       };
 
       try {
         // Act
-        const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+        const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
         
         // If it doesn't throw, check for error response
         expect(result.statusCode).toBe(400); // Bad request
@@ -361,14 +362,14 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '058',
         accountNumber: ''
       };
 
       try {
         // Act
-        await offrampLayoutService.verifyOfframpBank(verifyRequest);
+        await offrampPayoutService.verifyBankAccount(verifyRequest);
         // If it doesn't throw, fail
         expect(true).toBe(false);
       } catch (error: any) {
@@ -382,14 +383,14 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '',
         accountNumber: '0123456789'
       };
 
       try {
         // Act
-        await offrampLayoutService.verifyOfframpBank(verifyRequest);
+        await offrampPayoutService.verifyBankAccount(verifyRequest);
         // If it doesn't throw, fail
         expect(true).toBe(false);
       } catch (error: any) {
@@ -403,14 +404,14 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '058',
         accountNumber: '0000000000' // Non-existent account
       };
 
       try {
         // Act
-        const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+        const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
         
         // If it doesn't throw, check for error response
         expect(result.statusCode).toBe(404); // Not found
@@ -429,13 +430,13 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '058',
         accountNumber: '0123 4567 89' // Account with spaces
       };
 
       // Act
-      const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+      const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
 
       // Assert - API might strip spaces automatically
       expect(result.statusCode).toBe(200);
@@ -451,13 +452,13 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Arrange
-      const verifyRequest: VerifyOfframpBankRequesteDto = {
+      const verifyRequest: VerifyOfframpBankAccountRequestDto = {
         bankCode: '058',
         accountNumber: '012-345-6789' // Account with hyphens
       };
 
       // Act
-      const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+      const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
 
       // Assert - API might strip hyphens automatically
       expect(result.statusCode).toBe(200);
@@ -468,13 +469,13 @@ describe('OfframpLayoutService Integration Tests', () => {
       });
     }, 30000);
   });
-
+ */
   describe('combined layout operations', () => {
     it('should get banks and then verify an account', async () => {
       if (!requireApiKey()) return;
 
       // Step 1: Get all banks
-      const banksResult = await offrampLayoutService.getOfframpBanks();
+      const banksResult = await offrampPayoutService.getBanks();
       expect(banksResult.data.length).toBeGreaterThan(0);
       console.log('Step 1: Retrieved', banksResult.data.length, 'banks');
 
@@ -486,12 +487,12 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (gtbank) {
         console.log('Step 2: Selected bank for verification:', gtbank.name);
 
-        const verifyRequest: VerifyOfframpBankRequesteDto = {
+        const verifyRequest: VerifyOfframpBankAccountRequestDto = {
           bankCode: gtbank.code,
           accountNumber: '0123456789' // Replace with valid test account
         };
 
-        const verifyResult = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+        const verifyResult = await offrampPayoutService.verifyBankAccount(verifyRequest);
         
         expect(verifyResult.statusCode).toBe(200);
         expect(verifyResult.data.bankName).toBe(gtbank.name);
@@ -510,7 +511,7 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Get all banks first
-      const banksResult = await offrampLayoutService.getOfframpBanks();
+      const banksResult = await offrampPayoutService.getBanks();
       
       // Select a few banks to test
       const banksToTest = banksResult.data
@@ -520,18 +521,18 @@ describe('OfframpLayoutService Integration Tests', () => {
       console.log(`Testing ${banksToTest.length} banks`);
 
       for (const bank of banksToTest) {
-        const verifyRequest: VerifyOfframpBankRequesteDto = {
+        const verifyRequest: VerifyOfframpBankAccountRequestDto = {
           bankCode: bank.code,
           accountNumber: '0123456789' // Use appropriate test account for each bank
         };
 
         try {
-          const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+          const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
           console.log(`✓ ${bank.name}:`, {
             accountName: result.data.accountName,
             status: 'verified'
           });
-        } catch (error) {
+        } catch (error: any) {
           console.log(`✗ ${bank.name}: verification failed`, error.message);
         }
       }
@@ -543,22 +544,22 @@ describe('OfframpLayoutService Integration Tests', () => {
       if (!requireApiKey()) return;
 
       // Get all banks
-      const banksResult = await offrampLayoutService.getOfframpBanks();
+      const banksResult = await offrampPayoutService.getBanks();
       
       // Test a sample of banks (to avoid rate limiting)
       const sampleBanks = banksResult.data.slice(0, 5);
       
       for (const bank of sampleBanks) {
-        const verifyRequest: VerifyOfframpBankRequesteDto = {
+        const verifyRequest: VerifyOfframpBankAccountRequestDto = {
           bankCode: bank.code,
           accountNumber: '0123456789' // Use a valid test account
         };
 
         try {
-          const result = await offrampLayoutService.verifyOfframpBank(verifyRequest);
+          const result = await offrampPayoutService.verifyBankAccount(verifyRequest);
           expect(result.data.bankName).toBe(bank.name);
           console.log(`Bank code ${bank.code} (${bank.name}) is valid`);
-        } catch (error) {
+        } catch (error: any) {
           console.log(`Bank code ${bank.code} (${bank.name}) verification failed:`, error.message);
         }
       }

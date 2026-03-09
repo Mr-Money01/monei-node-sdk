@@ -2,16 +2,29 @@ import { OfframpStatus,WalletType,OfframpCurrency, Providers, OfframpAssets,Offr
 
 
 export interface OfframpQuoteRequestDto {
-  token: string;
-  network: string;
-  amount: string;
-  fiat?: string;
+  token: OfframpAssets;
+  network: OfframpNetworks;
+  amount: number;
+  fiat?: OfframpCurrency;
 }
 
-export interface AssetsResponseDto {
+export interface OfframpAssetsResponseDataNetworkDto {
+  network: string;
+  contractAddress: string;
+  decimals: number;
+  baseCurrency: string;
+}
+
+export interface OfframpAssetsResponseDataDto {
+  symbol: string;
+  name: string;
+  networks: OfframpAssetsResponseDataNetworkDto[];
+}
+
+export interface OfframpAssetsResponseDto {
   statusCode: number;
   message: string;
-  data: any[];
+  data: OfframpAssetsResponseDataDto[];
   errors?: {};
 }
 
@@ -26,16 +39,16 @@ export interface OfframpExchangeRateDto {
 export interface OfframpQuoteResponseDto {
   statusCode: number;
   message: string;
-  data: OfframpExchangeRateDto;
+  data: string;
   errors?: {};
 }
 
 export interface SwapCryptoToFiatRequestDto {
-  amount: string;
-  token: string;
-  network: number;
-  fiatCurrency: string;
-  bankCode: number;
+  amount: number;
+  token: OfframpAssets;
+  network: OfframpNetworks;
+  fiatCurrency: OfframpCurrency;
+  bankCode: string;
   accountNumber: string;
   accountName: string;
 }
@@ -105,9 +118,10 @@ export interface OfframpOrderResponseDto {
 export interface PayoutBankDto {
   name: string;
   code: string;
+  type: string;
 }
 
-export interface PayoutBanksResponseDto {
+export interface OfframpPayoutBanksResponseDto {
   statusCode: number;
   message: string;
   data: PayoutBankDto[];
@@ -124,7 +138,7 @@ export interface VerifyOfframpBankAccountResponseDataDto {
 export interface VerifyOfframpBankAccountResponseDto {
   statusCode: number;
   message: string;
-  data: VerifyOfframpBankAccountRequestDto; // Note: This references the request DTO, might need VerifyOfframpBankAccountResponseDataDto
+  data: VerifyOfframpBankAccountResponseDataDto;
   errors?: Record<string, any>;
 }
 
@@ -140,9 +154,8 @@ export interface OfframpHistoryRequestDto {
 
 export interface OfframpTransactionResponseDto {
   id: string;
-  internalReference: string;
+  reference: string;
   provider: string;
-  providerTransactionId: string;
   status: OfframpStatus;
   cryptoAmount: number;
   fiatAmount: number;
@@ -155,17 +168,15 @@ export interface OfframpTransactionResponseDto {
 }
 
 export interface OfframpTransactionListResponseDto {
-  ststusCode: number; // Note: Typo in original - 'ststusCode' instead of 'statusCode'
+  statusCode: number;
   message: string;
   data: OfframpTransactionResponseDto[];
   meta?: Record<string, any>;
 }
 
-export interface OfframpTransactionDetailResponseDto {
+export interface OfframpTransactionDetailDataDto {
   id: string;
-  internalReference: string;
-  provider: string;
-  providerTransactionId: string;
+  reference: string;
   status: OfframpStatus;
   cryptoAmount: number;
   fiatAmount: number;
@@ -174,12 +185,18 @@ export interface OfframpTransactionDetailResponseDto {
   toCurrency: string;
   createdAt: string;
   updatedAt: string;
-  expiresAt: string;
-  providerStatus: string;
+  expiresAt?: string;
   fees?: Record<string, any>;
   debitPaymentDetails?: Record<string, any>;
   creditPaymentDetails?: Record<string, any>;
-  completedAt: string;
+  completedAt?: string;
+}
+
+export interface OfframpTransactionDetailResponseDto {
+  status: string;
+  data: OfframpTransactionDetailDataDto;
+  message: string;
+  error?: any;
 }
 
 export interface OfframpStatusRequestDto {

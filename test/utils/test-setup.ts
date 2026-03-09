@@ -18,7 +18,7 @@ dotenv.config();
 
 export const createTestClient = (): MoneiClient => {
   const config: MoneiConfig = {
-    apiKey: process.env.MONEI_API_KEY2!,
+    apiKey: process.env.MONEI_API_KEY!,
     baseUrl: process.env.MONEI_BASE_URL || 'https://api.monei.cc',
     timeout: 30000,
   };
@@ -85,7 +85,7 @@ export const createTestTransactionService = (): TransactionService => {
 
 // Helper to skip tests if no API key is set
 export const requireApiKey = () => {
-  if (!process.env.MONEI_API_KEY2) {
+  if (!process.env.MONEI_API_KEY) {
     console.warn('MONEI_API_KEY not set. Skipping integration tests.');
     return false;
   }

@@ -1,4 +1,3 @@
-// enums/offramp.ts
 export enum OfframpStatus {
     initiated = "initiated",
     quote_created = "quote_created",
@@ -21,9 +20,9 @@ export enum WalletType {
 
 export enum OfframpCurrency {
     NGN = "NGN",
-    GHS = "GHS",
-    KES = "KES",
-    USD = "USD"
+    //GHS = "GHS",
+    //KES = "KES",
+    //USD = "USD"
 }
 
 export enum Providers {
@@ -50,9 +49,3 @@ export enum OfframpNetworks {
     lisk = "lisk",
     scroll = "scroll"
 }
-
-
-   
-
-
-    

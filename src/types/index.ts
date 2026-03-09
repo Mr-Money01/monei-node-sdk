@@ -27,3 +27,5 @@ export * from "./solana";
 export * from "./kyc";
 export * from "./offramp";
 export * from "./business";
+
+export * from "./enums/offramp.enum";

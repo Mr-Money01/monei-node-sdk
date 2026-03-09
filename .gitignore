@@ -239,3 +239,5 @@ test-results/
 
 # Optional: if using Storybook
 storybook-static/
+
+.npmrc

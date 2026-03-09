@@ -8,7 +8,7 @@ import {
 export class WalletAccountService {
   constructor(private client: MoneiClient) { }
 
-  async getWallet(chainId?: number): Promise<UserWalletResponseDto> {
+  async me(chainId?: number): Promise<UserWalletResponseDto> {
     //const params = chainId ? { chainId } : undefined;
 
     return this.client.get<UserWalletResponseDto>('/api/v1/wallet/me', { params: { chainId } });
