@@ -1,9 +1,9 @@
 import { MoneiClient } from '../../client/MoneiClient';
 import { DEPOSIT_METHOD } from '../../types/enums/deposit.enum';
 import {
-  ResponseDto,DepositAuthResponseDto,StatusResponseDto
+  ResponseDto,DepositAuthResponseDto,
 } from '../../types';
-import { GeneratePaymentLinkDto,  DepositWithPaymentMethodDto,DepositAuthDto, PaymentLinkResponseDto,DepositDto,PaymentResponseDto} from '../../types/deposit';
+import { GeneratePaymentLinkDto,  DepositWithPaymentMethodDto,DepositAuthDto, PaymentLinkResponseDto,DepositDto,PaymentResponseDto, DepositStatusResponseDto} from '../../types/deposit';
 
 export class DepositService {
   constructor(private client: MoneiClient) { }
@@ -25,8 +25,8 @@ export class DepositService {
     return this.client.post<PaymentLinkResponseDto>('/api/v1/wallet/deposit/payment-link',  paymentData );
   }
 
-  async getStatus(reference: string): Promise<StatusResponseDto> {
-    return this.client.get<StatusResponseDto>(`/api/v1/wallet/deposit/status/${reference}`);
+  async getStatus(reference: string): Promise<DepositStatusResponseDto> {
+    return this.client.get<DepositStatusResponseDto>(`/api/v1/wallet/deposit/status/${reference}`);
   }
 
 }

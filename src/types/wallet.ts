@@ -1,3 +1,5 @@
+import { PaymentDto } from "./deposit";
+
 export enum DepositMethodsEnum {
   BANK_TRANSFER = 'BANK_TRANSFER',
   USSD = 'USSD',
@@ -325,12 +327,6 @@ export interface DepositAuthResponseDto {
     errors: {};
 }
 
-export interface StatusResponseDto {
-    statusCode: number;
-    message: string;
-    data: {};
-    errors: {};
-}
 
 
 

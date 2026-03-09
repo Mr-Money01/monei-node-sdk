@@ -106,3 +106,10 @@ export interface FlwBillingAddressDto {
   postal_code: string;
   state: string;
 }
+
+export interface DepositStatusResponseDto {
+    statusCode: number;
+    message: string;
+    data: PaymentDto;
+    errors: {};
+}
