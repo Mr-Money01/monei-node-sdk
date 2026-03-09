@@ -834,8 +834,8 @@ import type {
 
 ## Getting Help
 
-- **API Docs**: [goviral-ai-lab.gitbook.io/monei-api-gateway-docs](https://docs.monei.cc/)
-- **Interactive Reference**: [api.monei.cc/api-gateway-docs](https://docs.monei.cc/api-reference/)
+- **API Docs**: [https://docs.monei.cc/](https://docs.monei.cc/)
+- **Interactive Reference**: [https://docs.monei.cc/api-reference/](https://docs.monei.cc/api-reference/)
 - **Support**: tech@monei.cc
 - **Issues**: [GitHub Issues](https://github.com/monei/monei-nodejs-sdk/issues)
 
